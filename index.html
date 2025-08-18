@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+CTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>苏苏的个人网站</title>
+    <title>Crystal的个人网站</title>
     <!-- 引入Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入Font Awesome图标 -->
@@ -71,15 +71,15 @@
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-primary flex items-center">
                 <i class="fa fa-user-circle mr-2"></i>
-                <span>我的网站</span>
+                <span>Crystal的网站</span>
             </a>
             
             <!-- 桌面导航 -->
             <nav class="hidden md:flex space-x-8">
-                <a href="#about" class="font-medium hover:text-primary transition-custom">关于我</a>
-                <a href="#skills" class="font-medium hover:text-primary transition-custom">技能</a>
-                <a href="#projects" class="font-medium hover:text-primary transition-custom">项目</a>
-                <a href="#contact" class="font-medium hover:text-primary transition-custom">联系我</a>
+                <a href="#about" class="font-medium hover:text-primary transition-custom">个人经历</a>
+                <a href="#skills" class="font-medium hover:text-primary transition-custom">兴趣爱好</a>
+                <a href="#projects" class="font-medium hover:text-primary transition-custom">未来规划</a>
+                <a href="#contact" class="font-medium hover:text-primary transition-custom">联系方式</a>
             </nav>
             
             <!-- 移动端菜单按钮 -->
@@ -91,10 +91,10 @@
         <!-- 移动端导航菜单 -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
             <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
-                <a href="#about" class="py-2 font-medium hover:text-primary transition-custom">关于我</a>
-                <a href="#skills" class="py-2 font-medium hover:text-primary transition-custom">技能</a>
-                <a href="#projects" class="py-2 font-medium hover:text-primary transition-custom">项目</a>
-                <a href="#contact" class="py-2 font-medium hover:text-primary transition-custom">联系我</a>
+                <a href="#about" class="py-2 font-medium hover:text-primary transition-custom">个人经历</a>
+                <a href="#skills" class="py-2 font-medium hover:text-primary transition-custom">兴趣爱好</a>
+                <a href="#projects" class="py-2 font-medium hover:text-primary transition-custom">未来规划</a>
+                <a href="#contact" class="py-2 font-medium hover:text-primary transition-custom">联系方式</a>
             </div>
         </div>
     </header>
@@ -104,53 +104,43 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-10 md:mb-0 animate-fadeIn">
-                    <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-dark mb-4">
+                    <h1 class="text-[clamp(2.5rem,7vw,4.5rem)] font-bold leading-tight text-dark mb-4">
                         你好，我是 <span class="text-primary">苏苏</span>
                     </h1>
                     <h2 class="text-[clamp(1.2rem,3vw,1.8rem)] text-gray-600 mb-6">
                         一个搞物理的爱猫人士
                     </h2>
-                    <p class="text-lg text-gray-700 mb-8 max-w-lg">
+                    <p class="text-base md:text-lg text-gray-700 mb-8 max-w-lg leading-relaxed">
                         表面柔弱但内心冷酷的杀手，90%时间独处，爱好撸猫和搞钱
                     </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#contact" class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-medium transition-custom shadow-lg hover:shadow-xl">
-                            不要联系我
-                        </a>
-                        <a href="#projects" class="bg-white hover:bg-gray-100 text-primary border border-primary px-6 py-3 rounded-lg font-medium transition-custom">
-                            不要了解我
-                        </a>
-                    </div>
                 </div>
                 <div class="md:w-1/2 flex justify-center animate-fadeIn delay-200">
                     <div class="relative">
                         <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-2xl">
                             <img src="images/大头照.jpg" alt="个人照片" class="w-full h-full object-cover">
                         </div>
-                        <div class="absolute -bottom-4 -right-4 bg-secondary text-white p-4 rounded-lg shadow-lg">
-                            <i class="fa fa-code text-2xl"></i>
-                        </div>
+                        <!-- 已移除绿色按钮 -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 关于我 -->
+    <!-- 个人经历 -->
     <section id="about" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">关于我</h2>
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">个人经历</h2>
                 <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
             </div>
             
             <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2">
+                <div class="md:w-1/2 max-w-md"> <!-- 限制最大宽度 -->
                     <div class="relative">
-                        <img src="https://picsum.photos/id/180/600/800" alt="工作照" class="rounded-lg shadow-xl w-full">
+                        <img src="images/两岁照片.jpg" alt="工作照" class="rounded-lg shadow-xl w-full max-w-sm mx-auto"> <!-- 图片最大宽度调整为sm尺寸 -->
                         <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-lg shadow-lg">
-                            <p class="text-2xl font-bold text-primary">2+</p>
-                            <p class="text-gray-600">年工作经验</p>
+                            <p class="text-2xl font-bold text-primary">23年+</p>
+                            <p class="text-gray-600">人间存活经验</p>
                         </div>
                     </div>
                 </div>
@@ -158,30 +148,41 @@
                 <div class="md:w-1/2">
                     <h3 class="text-2xl font-bold mb-4 text-dark">我是谁？</h3>
                     <p class="text-gray-700 mb-6 leading-relaxed">
-                        我是一名充满激情的前端开发者，拥有2年多的专业经验。我毕业于XX大学计算机科学专业，
-                        对Web开发有着浓厚的兴趣和热情。
+                        2002年10月28日，魔童降世
                     </p>
                     <p class="text-gray-700 mb-6 leading-relaxed">
-                        我擅长将设计转化为高质量的代码，并注重用户体验和界面美感。我不断学习新技术，
-                        努力提升自己的技能水平，以应对不断变化的Web开发需求。
+                        幼儿园大班还在尿裤子被我妈揍了<br>
+                        小学三年级成绩稀烂但很喜欢我的语文老师<br>
+                        六年级终于开窍了保送到当地最好的私立初中<br>
+                        八年级第一次知道喜欢是什么感觉<br>
+                        九年级快卷成狗了，我真是太配成绩好了<br>
+                        高中最期待的是每周六晚上放假，因为可以在寝室看言情小说<br>
+                        高考619分，真正做到百里挑一了<br>
+                        大学是物理专业，哇塞怎么没有帅哥，哭晕<br>
+                        大三做短视频火了，全网二十多万粉丝<br>
+                        大四凉了，但保研了<br>
+                        研一经常翘水课但一次都没被逮到过<br>
+                    </p>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        现在是天蝎座intj大魔王
                     </p>
                     
                     <div class="grid grid-cols-2 gap-4 mb-8">
                         <div class="flex items-center">
                             <i class="fa fa-check-circle text-secondary text-xl mr-3"></i>
-                            <span>响应式设计</span>
+                            <span>在无数次绝望中幸存</span>
                         </div>
                         <div class="flex items-center">
                             <i class="fa fa-check-circle text-secondary text-xl mr-3"></i>
-                            <span>UI/UX设计</span>
+                            <span>物欲不高但喜欢赚钱</span>
                         </div>
                         <div class="flex items-center">
                             <i class="fa fa-check-circle text-secondary text-xl mr-3"></i>
-                            <span>性能优化</span>
+                            <span>小兔子537的家长</span>
                         </div>
                         <div class="flex items-center">
                             <i class="fa fa-check-circle text-secondary text-xl mr-3"></i>
-                            <span>团队协作</span>
+                            <span>大部分时候都喜欢独处</span>
                         </div>
                     </div>
                     
@@ -194,14 +195,14 @@
         </div>
     </section>
 
-    <!-- 技能 -->
+    <!-- 兴趣爱好 -->
     <section id="skills" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">我的技能</h2>
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">兴趣爱好</h2>
                 <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
                 <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
-                    我掌握了多种Web开发技术和工具，能够独立完成从设计到开发的全流程工作
+                    唯一喜欢的东西是猫，唯一向往的工作是不劳而获
                 </p>
             </div>
             
@@ -211,16 +212,14 @@
                     <div class="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
                         <i class="fa fa-html5 text-2xl text-orange-500"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-dark">前端开发</h3>
+                    <h3 class="text-xl font-bold mb-3 text-dark">电子竞技</h3>
                     <p class="text-gray-600 mb-6">
-                        精通HTML5、CSS3和JavaScript，熟悉响应式设计和现代前端框架。
+                        精通且热爱各种竞技类型手游，其实是闲的无聊且啥都想试试。但由于过高的游戏天赋和易于常人的坚持努力，各种游戏都玩的登峰造极。
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">HTML5</span>
-                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">CSS3</span>
-                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">JavaScript</span>
-                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">React</span>
-                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Tailwind CSS</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">王者荣耀省级蔡文姬、朵利亚</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">金铲铲S14赛季王者</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">月圆之夜北京市前十</span>
                     </div>
                 </div>
                 
@@ -229,15 +228,14 @@
                     <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-6">
                         <i class="fa fa-paint-brush text-2xl text-green-600"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-dark">UI/UX设计</h3>
+                    <h3 class="text-xl font-bold mb-3 text-dark">恢复性睡眠</h3>
                     <p class="text-gray-600 mb-6">
-                        具备良好的设计感和审美能力，能够创建直观、美观的用户界面。
+                        最喜欢睡觉，最长睡眠记录达十四小时。十分认可睡眠是短暂的死亡，而活着是一场长久的失眠。
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Figma</span>
-                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Photoshop</span>
-                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">原型设计</span>
-                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">用户研究</span>
+                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">喜欢做有帅哥的梦</span>
+                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">有美女也不是不行</span>
+                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">实际上经常梦到在大逃杀T.T</span>
                     </div>
                 </div>
                 
@@ -246,29 +244,29 @@
                     <div class="w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
                         <i class="fa fa-cogs text-2xl text-purple-600"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-dark">开发工具</h3>
+                    <h3 class="text-xl font-bold mb-3 text-dark">ci各种海鲜</h3>
                     <p class="text-gray-600 mb-6">
-                        熟练使用各种开发工具和版本控制系统，提高开发效率和代码质量。
+                        海鲜嚎ci，我cicicicicici......最喜欢蒜蓉生蚝，但是好贵啊呜呜呜呜呜。只吃熟海鲜，不吃生海鲜，yueyueyueyueyueyue......
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">Git</span>
-                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">VS Code</span>
-                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">Webpack</span>
-                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">Chrome DevTools</span>
+                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">波士顿龙虾</span>
+                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">超级大生蚝🦪</span>
+                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">无敌大扇贝</span>
+                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">鱿鱼吃多了不想吃了</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 项目 -->
+    <!-- 未来规划 -->
     <section id="projects" class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">我的项目</h2>
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">未来规划</h2>
                 <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
                 <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
-                    这里展示了我过去开发的一些项目，每个项目都体现了我的技术能力和设计理念
+                    最大的愿望是成为快乐健康、有钱有闲的小冯同志
                 </p>
             </div>
             
