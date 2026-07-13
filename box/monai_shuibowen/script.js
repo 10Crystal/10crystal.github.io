@@ -77,7 +77,7 @@ let config = {
     COLORFUL: true,
     COLOR_UPDATE_SPEED: 10,
     PAUSED: false,
-    BACK_COLOR: { r: 245, g: 240, b: 210 },  // warm gold from photo, lighter
+    BACK_COLOR: { r: 251, g: 247, b: 240 },  // Monet cream
     TRANSPARENT: false,
     BLOOM: true,
     BLOOM_ITERATIONS: 8,
