@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monet Portrait Generator</title>
+<style>
+  :root {
+    --lavender: #9B8EC4;
+    --sage:     #8BA89A;
+    --sky:      #7BA5C8;
+    --cream:    #FBF7F0;
+    --peach:    #E8C9A0;
+    --rose:     #D4A5A5;
+    --pond:     #5B8A84;
+    --slate:    #4A5568;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Noto Sans', 'Noto Sans SC', system-ui, sans-serif;
+    background: linear-gradient(135deg, #FBF7F0 0%, #F3E8D9 40%, #DEE8E5 100%);
+    min-height: 100vh;
+    color: var(--slate);
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  h1 {
+    font-family: 'Noto Serif', 'Noto Serif SC', Georgia, serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    text-align: center;
+    color: var(--lavender);
+    margin-bottom: 0.25rem;
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--slate);
+    opacity: 0.55;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  /* ── Upload area ── */
+  .upload-zone {
+    border: 2px dashed rgba(155,142,196,0.4);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    background: rgba(255,255,255,0.45);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: all 0.35s;
+    margin-bottom: 1.5rem;
+  }
+  .upload-zone:hover { border-color: var(--lavender); background: rgba(255,255,255,0.65); }
+  .upload-zone .icon { font-size: 2.5rem; margin-bottom: 0.75rem; display: block; }
+  .upload-zone p { opacity: 0.55; font-size: 0.9rem; }
+  .upload-zone input { display: none; }
+
+  /* ── Two-pane result ── */
+  .result-area { display: none; }
+  .panes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  @media (max-width: 640px) { .panes { grid-template-columns: 1fr; } }
+
+  .pane {
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1rem;
+    border: 1px solid rgba(155,142,196,0.2);
+  }
+  .pane h3 {
+    font-family: 'Noto Serif', 'Noto Serif SC', serif;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    text-align: center;
+    opacity: 0.7;
+  }
+  .pane canvas {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+  }
+
+  /* ── Controls ── */
+  .controls {
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid rgba(155,142,196,0.2);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+  }
+  .control-group { flex: 1; min-width: 130px; }
+  .control-group label {
+    display: block;
+    font-size: 0.78rem;
+    opacity: 0.6;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+  }
+  .control-group input[type=range] { width: 100%; accent-color: var(--lavender); }
+  .control-group .value { float: right; font-size: 0.75rem; opacity: 0.5; }
+
+  button {
+    padding: 10px 28px;
+    border: none;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .btn-paint {
+    background: linear-gradient(135deg, var(--lavender), var(--sky));
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(155,142,196,0.4);
+  }
+  .btn-paint:hover { box-shadow: 0 4px 20px rgba(155,142,196,0.6); transform: translateY(-1px); }
+  .btn-dl {
+    background: linear-gradient(135deg, var(--sage), var(--pond));
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(139,168,154,0.35);
+  }
+  .btn-dl:hover { box-shadow: 0 4px 20px rgba(139,168,154,0.5); transform: translateY(-1px); }
+
+  .status {
+    text-align: center;
+    margin-top: 0.75rem;
+    font-size: 0.82rem;
+    opacity: 0.55;
+    height: 1.25rem;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 0.75rem;
+    opacity: 0.35;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Monet Portrait Generator</h1>
+  <p class="subtitle">Turn any photo into an impressionist oil painting</p>
+
+  <!-- Upload -->
+  <div class="upload-zone" id="upload-zone">
+    <span class="icon">🎨</span>
+    <p>Click or drag an image here to upload</p>
+    <input type="file" id="file-input" accept="image/*">
+  </div>
+
+  <!-- Result -->
+  <div class="result-area" id="result-area">
+    <div class="panes">
+      <div class="pane">
+        <h3>Original</h3>
+        <canvas id="canvas-original"></canvas>
+      </div>
+      <div class="pane">
+        <h3>Monet Impression</h3>
+        <canvas id="canvas-monet"></canvas>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="control-group">
+        <label>Strokes <span class="value" id="val-strokes">6000</span></label>
+        <input type="range" id="r-strokes" min="1000" max="20000" value="6000" step="500">
+      </div>
+      <div class="control-group">
+        <label>Size <span class="value" id="val-size">1.0</span></label>
+        <input type="range" id="r-size" min="0.3" max="2.5" value="1.0" step="0.1">
+      </div>
+      <div class="control-group">
+        <label>Jitter <span class="value" id="val-jitter">0.15</span></label>
+        <input type="range" id="r-jitter" min="0" max="0.4" value="0.15" step="0.01">
+      </div>
+      <div class="control-group">
+        <label>Softness <span class="value" id="val-blur">4</span></label>
+        <input type="range" id="r-blur" min="0" max="12" value="4" step="1">
+      </div>
+      <button class="btn-paint" id="btn-render">Re-render</button>
+      <button class="btn-dl" id="btn-download">Download</button>
+    </div>
+    <p class="status" id="status"></p>
+  </div>
+
+  <footer>
+    Inspired by Claude Monet · Painterly rendering in the browser
+  </footer>
+</div>
+
+<script>
+/* ═══════════════ Monet Painterly Rendering Engine ═══════════════ */
+
+const uploadZone  = document.getElementById('upload-zone');
+const fileInput   = document.getElementById('file-input');
+const resultArea  = document.getElementById('result-area');
+const canvasOrig  = document.getElementById('canvas-original');
+const canvasMonet = document.getElementById('canvas-monet');
+const ctxOrig     = canvasOrig.getContext('2d');
+const ctxMonet    = canvasMonet.getContext('2d');
+const btnRender   = document.getElementById('btn-render');
+const btnDownload = document.getElementById('btn-download');
+const statusEl    = document.getElementById('status');
+
+let sourceImage = null;
+
+/* ── Monet colour palette (HSL ranges) ── */
+const MONET_PALETTE = [
+  [250, 0.35, 0.75],   // lavender
+  [155, 0.20, 0.60],   // sage green
+  [200, 0.30, 0.65],   // pond blue
+  [35,  0.40, 0.75],   // warm gold
+  [345, 0.18, 0.72],   // rose
+  [170, 0.15, 0.55],   // deep water
+  [210, 0.25, 0.70],   // sky blue
+  [25,  0.35, 0.78],   // peach
+];
+
+/* ── Slider bindings ── */
+['strokes','size','jitter','blur'].forEach(id => {
+  document.getElementById('r-'+id).addEventListener('input', function() {
+    document.getElementById('val-'+id).textContent = this.value;
+  });
+});
+
+/* ── Upload handling ── */
+uploadZone.addEventListener('click', () => fileInput.click());
+fileInput.addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (file) loadImage(file);
+});
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.style.borderColor = 'var(--lavender)'; });
+uploadZone.addEventListener('dragleave', () => { uploadZone.style.borderColor = 'rgba(155,142,196,0.4)'; });
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadZone.style.borderColor = 'rgba(155,142,196,0.4)';
+  const file = e.dataTransfer.files[0];
+  if (file) loadImage(file);
+});
+
+function loadImage(file) {
+  if (!file.type.startsWith('image/')) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      sourceImage = img;
+      /* Fit to a max width while keeping aspect ratio */
+      const MAX = 600;
+      let w = img.width, h = img.height;
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      canvasOrig.width  = w;
+      canvasOrig.height = h;
+      canvasMonet.width  = w;
+      canvasMonet.height = h;
+      ctxOrig.drawImage(img, 0, 0, w, h);
+      resultArea.style.display = 'block';
+      renderMonet();
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ═══════════ Core painterly algorithm ═══════════ */
+function renderMonet() {
+  if (!sourceImage) return;
+
+  const nStrokes = parseInt(document.getElementById('r-strokes').value);
+  const sizeMul  = parseFloat(document.getElementById('r-size').value);
+  const jitter   = parseFloat(document.getElementById('r-jitter').value);
+  const blurAmt  = parseInt(document.getElementById('r-blur').value);
+
+  const W = canvasMonet.width;
+  const H = canvasMonet.height;
+
+  statusEl.textContent = 'Painting in progress…';
+  btnRender.disabled = true;
+
+  /* Draw a cream-tinted background */
+  ctxMonet.fillStyle = '#FBF7F0';
+  ctxMonet.fillRect(0, 0, W, H);
+
+  /* Use requestAnimationFrame chunks to keep UI responsive */
+  const sourceData = ctxOrig.getImageData(0, 0, W, H).data;
+
+  const BATCH = 400;
+  let i = 0;
+
+  function paintBatch() {
+    const end = Math.min(i + BATCH, nStrokes);
+    for (; i < end; i++) {
+      /* Progressively smaller strokes (coarse → fine) */
+      const progress = i / nStrokes;
+      const baseRadius = (2.5 + 12 * (1 - progress)) * sizeMul;   // 12→2.5 px
+
+      /* Random position; colour-sampled from source image */
+      const cx = Math.random() * W;
+      const cy = Math.random() * H;
+
+      /* Sample source colour at this position */
+      const px = Math.min(W - 1, Math.max(0, Math.floor(cx)));
+      const py = Math.min(H - 1, Math.max(0, Math.floor(cy)));
+      const idx = (py * W + px) * 4;
+      let r = sourceData[idx];
+      let g = sourceData[idx + 1];
+      let b = sourceData[idx + 2];
+
+      /* Monet colour shift: nudge toward the Monet palette */
+      const hsl = rgbToHsl(r, g, b);
+      const monetHsl = nearestMonetColour(hsl[0]);
+      const mix = 0.15 + jitter;
+      const h = lerpAngle(hsl[0], monetHsl[0], mix);
+      const s = hsl[1] * (1 - mix * 0.6) + monetHsl[1] * mix * 0.6;
+      const l = hsl[2] * (1 - mix * 0.3) + monetHsl[2] * mix * 0.3;
+      const [rr, gg, bb] = hslToRgb(h, Math.min(1, s), Math.min(1, l));
+
+      /* Add random colour jitter */
+      const j = jitter;
+      const rr2 = clamp(Math.round(rr + (Math.random() - 0.5) * j * 255), 0, 255);
+      const gg2 = clamp(Math.round(gg + (Math.random() - 0.5) * j * 255), 0, 255);
+      const bb2 = clamp(Math.round(bb + (Math.random() - 0.5) * j * 255), 0, 255);
+
+      /* Draw an elliptical brush stroke */
+      const angle = Math.random() * Math.PI * 2;
+      const rx = baseRadius * (0.4 + Math.random() * 1.2);
+      const ry = baseRadius * (0.3 + Math.random() * 0.8);
+      const alpha = 0.15 + Math.random() * 0.25;  // low opacity for layering
+
+      ctxMonet.save();
+      ctxMonet.translate(cx + (Math.random()-0.5)*baseRadius*0.5, cy + (Math.random()-0.5)*baseRadius*0.5);
+      ctxMonet.rotate(angle);
+      ctxMonet.fillStyle = `rgba(${rr2},${gg2},${bb2},${alpha})`;
+      ctxMonet.beginPath();
+      ctxMonet.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+      ctxMonet.fill();
+      ctxMonet.restore();
+    }
+
+    if (i < nStrokes) {
+      statusEl.textContent = `Painting… ${Math.round(i/nStrokes*100)}%`;
+      requestAnimationFrame(paintBatch);
+    } else {
+      /* Post-processing: soft bloom (Monet's trademark blur) */
+      if (blurAmt > 0) {
+        const full = document.createElement('canvas');
+        full.width = W; full.height = H;
+        const fctx = full.getContext('2d');
+        fctx.drawImage(canvasMonet, 0, 0);
+        fctx.filter = `blur(${blurAmt}px)`;
+        fctx.drawImage(full, 0, 0);
+        fctx.filter = 'none';
+        fctx.globalCompositeOperation = 'source-over';
+        fctx.globalAlpha = 0.35;
+        fctx.drawImage(full, 0, 0);
+        fctx.globalAlpha = 1;
+        fctx.drawImage(canvasMonet, 0, 0);
+        ctxMonet.clearRect(0, 0, W, H);
+        ctxMonet.drawImage(full, 0, 0);
+      }
+
+      statusEl.textContent = 'Done! 🎨';
+      btnRender.disabled = false;
+    }
+  }
+
+  paintBatch();
+}
+
+/* ── Colour helpers ── */
+function rgbToHsl(r, g, b) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r,g,b), min = Math.min(r,g,b);
+  let h=0, s=0, l=(max+min)/2;
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d/(2-max-min) : d/(max+min);
+    if (max === r) h = ((g-b)/d + (g<b?6:0)) / 6;
+    else if (max === g) h = ((b-r)/d + 2) / 6;
+    else h = ((r-g)/d + 4) / 6;
+  }
+  return [h*360, s, l];
+}
+
+function hslToRgb(h, s, l) {
+  h /= 360;
+  let r, g, b;
+  if (s === 0) { r=g=b=l; }
+  else {
+    const hue2rgb = (p,q,t) => {
+      if (t<0) t+=1; if (t>1) t-=1;
+      if (t<1/6) return p+(q-p)*6*t;
+      if (t<1/2) return q;
+      if (t<2/3) return p+(q-p)*(2/3-t)*6;
+      return p;
+    };
+    const q = l < 0.5 ? l*(1+s) : l+s-l*s;
+    const p = 2*l - q;
+    r = hue2rgb(p,q,h+1/3);
+    g = hue2rgb(p,q,h);
+    b = hue2rgb(p,q,h-1/3);
+  }
+  return [Math.round(r*255), Math.round(g*255), Math.round(b*255)];
+}
+
+function lerpAngle(a, b, t) {
+  let diff = b - a;
+  while (diff > 180) diff -= 360;
+  while (diff < -180) diff += 360;
+  return a + diff * t;
+}
+
+function nearestMonetColour(h) {
+  let best = MONET_PALETTE[0];
+  let bestDist = Infinity;
+  for (const m of MONET_PALETTE) {
+    let d = Math.abs(h - m[0]);
+    d = Math.min(d, 360 - d);
+    if (d < bestDist) { bestDist = d; best = m; }
+  }
+  return best;
+}
+
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+/* ── Download ── */
+btnDownload.addEventListener('click', () => {
+  const link = document.createElement('a');
+  link.download = 'monet-portrait.png';
+  link.href = canvasMonet.toDataURL('image/png');
+  link.click();
+});
+
+/* ── Re-render ── */
+btnRender.addEventListener('click', renderMonet);
+</script>
+</body>
+</html>
