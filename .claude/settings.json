@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init *)",
+      "Bash(git branch *)",
+      "Bash(git commit -m '初始提交：Crystal的个人网站 *)",
+      "Bash(gh auth *)",
+      "Bash(ls -la ~/.ssh/ 2>/dev/null && echo \"---SSH keys exist---\" || echo \"---No SSH keys---\")",
+      "Read(//Users/crystal/.ssh/**)",
+      "Bash(cat ~/.ssh/id_ed25519.pub)",
+      "Bash(ssh-keyscan github.com)",
+      "Bash(ssh -T git@github.com)",
+      "Bash(git remote *)",
+      "Bash(git pull *)",
+      "Bash(git add *)",
+      "Bash(git rebase *)"
+    ]
+  }
+}
