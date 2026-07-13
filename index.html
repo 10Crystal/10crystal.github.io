@@ -3,400 +3,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crystal的个人网站</title>
-    <!-- 引入Tailwind CSS -->
+    <title>Crystal的个人网站 · 印象</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入Font Awesome图标 -->
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    
-    <!-- 配置Tailwind自定义颜色和字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#3B82F6',
-                        secondary: '#10B981',
-                        dark: '#1F2937',
-                        light: '#F3F4F6'
+                        /* 莫奈睡莲色系 */
+                        lavender:  '#9B8EC4',   /* 睡莲紫 */
+                        sage:      '#8BA89A',   /* 鼠尾草绿 */
+                        sky:       '#7BA5C8',   /* 水面蓝 */
+                        cream:     '#FBF7F0',   /* 画布奶油 */
+                        peach:     '#E8C9A0',   /* 日出暖金 */
+                        rose:      '#D4A5A5',   /* 莲芽粉 */
+                        pond:      '#5B8A84',   /* 池水深绿 */
+                        wheat:     '#C9A96E',   /* 金色麦光 */
+                        slate:     '#4A5568',   /* 文本灰 */
+                        shadow:    '#3D4554',   /* 深色 */
                     },
                     fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'Georgia', 'serif'],
+                        sans:  ['"Noto Sans SC"', 'system-ui', 'sans-serif'],
                     },
                 }
             }
         }
     </script>
-    
-    <!-- 自定义工具类 -->
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .text-shadow {
-                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .transition-custom {
-                transition: all 0.3s ease;
-            }
-        }
-    </style>
-    
+
     <style>
-        /* 平滑滚动 */
-        html {
-            scroll-behavior: smooth;
+        html { scroll-behavior: smooth; }
+
+        /* ── 印象派光斑背景 ── */
+        body {
+            background-color: #FBF7F0;
+            overflow-x: hidden;
         }
-        
-        /* 动画效果 */
+
+        .monet-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        .monet-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            /* 多层光斑 — 模拟睡莲池面光斑 */
+            background:
+                radial-gradient(ellipse 600px 400px at 10% 20%, rgba(155,142,196,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse 500px 350px at 85% 50%, rgba(139,168,154,0.15) 0%, transparent 70%),
+                radial-gradient(ellipse 400px 500px at 50% 80%, rgba(123,165,200,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 300px 300px at 20% 70%, rgba(232,201,160,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse 350px 250px at 70% 15%, rgba(212,165,165,0.14) 0%, transparent 70%);
+        }
+
+        /* ── 各区块印象派背景色 ── */
+        .bg-monet-hero {
+            background: linear-gradient(160deg, #FBF7F0 0%, #F3E8D9 30%, #E8DDD0 60%, #DEE8E5 100%);
+        }
+        .bg-monet-pond {
+            background: linear-gradient(135deg, #EEF2ED 0%, #E8EDEF 40%, #EDE8EF 100%);
+        }
+        .bg-monet-wisteria {
+            background: linear-gradient(180deg, #F5F1F7 0%, #EEF0F4 50%, #F2F5F1 100%);
+        }
+
+        /* ── 毛玻璃卡片（印象派的朦胧感） ── */
+        .glass {
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+        .glass-nav {
+            background: rgba(251,247,240,0.72);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(155,142,196,0.15);
+        }
+
+        /* ── 标题装饰线 ── */
+        .divider-monet {
+            background: linear-gradient(90deg, transparent, #9B8EC4, #8BA89A, #7BA5C8, transparent);
+            height: 2px;
+            border-radius: 2px;
+        }
+
+        /* ── 标签色 ── */
+        .tag-lavender { background: rgba(155,142,196,0.18); color: #6B5E8A; }
+        .tag-sage     { background: rgba(139,168,154,0.18); color: #4A7A5E; }
+        .tag-sky      { background: rgba(123,165,200,0.18); color: #4A7090; }
+        .tag-rose     { background: rgba(212,165,165,0.18); color: #8A5A5A; }
+        .tag-peach    { background: rgba(232,201,160,0.22); color: #8B6D4A; }
+
+        /* ── 淡入动画 ── */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
-        
-        .animate-fadeIn {
-            animation: fadeIn 0.6s ease forwards;
-        }
-        
+        .animate-fadeIn { animation: fadeIn 0.8s ease forwards; }
         .delay-100 { animation-delay: 0.1s; }
         .delay-200 { animation-delay: 0.2s; }
         .delay-300 { animation-delay: 0.3s; }
+
+        /* ── 缓慢浮动光斑（模拟水光摇曳） ── */
+        @keyframes floatBlob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33%      { transform: translate(12px, -8px) scale(1.03); }
+            66%      { transform: translate(-6px, 6px) scale(0.98); }
+        }
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.22;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatBlob 14s ease-in-out infinite;
+        }
+        .blob-1 { width: 300px; height: 300px; background: #9B8EC4; top: -60px; left: -40px; animation-delay: 0s; }
+        .blob-2 { width: 250px; height: 250px; background: #8BA89A; top: 30%; right: -50px; animation-delay: -5s; }
+        .blob-3 { width: 220px; height: 220px; background: #7BA5C8; bottom: 10%; left: 20%; animation-delay: -9s; }
+
+        /* ── 通用过渡 ── */
+        .transition-soft { transition: all 0.35s ease; }
+
+        /* ── 图片柔和边框 ── */
+        .img-frame {
+            box-shadow: 0 4px 24px rgba(139,142,154,0.18), 0 0 0 1px rgba(155,142,196,0.15);
+        }
+
+        /* ── 按钮 ── */
+        .btn-monet {
+            display: inline-flex; align-items: center;
+            padding: 10px 24px;
+            border-radius: 9999px;
+            font-weight: 500;
+            background: linear-gradient(135deg, #9B8EC4, #7BA5C8);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(155,142,196,0.35);
+            transition: all 0.35s ease;
+        }
+        .btn-monet:hover {
+            box-shadow: 0 4px 20px rgba(155,142,196,0.5);
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 
-<body class="bg-gray-50 font-sans text-gray-800">
-    <!-- 导航栏 -->
-    <header id="navbar" class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
+<body class="font-sans text-slate antialiased">
+
+    <!-- ══════════════ 浮动的印象派光斑 ══════════════ -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- ══════════════ 导航栏 ══════════════ -->
+    <header id="navbar" class="fixed w-full glass-nav z-50 transition-all duration-300">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-primary flex items-center">
-                <i class="fa fa-user-circle mr-2"></i>
-                <span>Crystal的网站</span>
+            <a href="#" class="text-2xl font-serif font-bold text-lavender flex items-center gap-2">
+                <span>🎨</span>
+                <span>Crystal</span>
             </a>
-            
-            <!-- 桌面导航 -->
-            <nav class="hidden md:flex space-x-8">
-                <a href="#about" class="font-medium hover:text-primary transition-custom">个人经历</a>
-                <a href="#skills" class="font-medium hover:text-primary transition-custom">兴趣爱好</a>
-                <a href="#projects" class="font-medium hover:text-primary transition-custom">未来规划</a>
-                <a href="#contact" class="font-medium hover:text-primary transition-custom">联系方式</a>
+
+            <nav class="hidden md:flex space-x-8 text-sm tracking-wide">
+                <a href="#about" class="font-medium text-slate hover:text-lavender transition-soft">个人经历</a>
+                <a href="#skills" class="font-medium text-slate hover:text-sage transition-soft">兴趣爱好</a>
+                <a href="#projects" class="font-medium text-slate hover:text-sky transition-soft">未来规划</a>
+                <a href="#contact" class="font-medium text-slate hover:text-rose transition-soft">联系方式</a>
             </nav>
-            
-            <!-- 移动端菜单按钮 -->
-            <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none">
+
+            <button id="menu-toggle" class="md:hidden text-slate focus:outline-none">
                 <i class="fa fa-bars text-xl"></i>
             </button>
         </div>
-        
-        <!-- 移动端导航菜单 -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+
+        <div id="mobile-menu" class="hidden md:hidden bg-cream/90 backdrop-blur-xl border-t border-lavender/15">
             <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
-                <a href="#about" class="py-2 font-medium hover:text-primary transition-custom">个人经历</a>
-                <a href="#skills" class="py-2 font-medium hover:text-primary transition-custom">兴趣爱好</a>
-                <a href="#projects" class="py-2 font-medium hover:text-primary transition-custom">未来规划</a>
-                <a href="#contact" class="py-2 font-medium hover:text-primary transition-custom">联系方式</a>
+                <a href="#about" class="py-2 font-medium hover:text-lavender transition-soft">个人经历</a>
+                <a href="#skills" class="py-2 font-medium hover:text-sage transition-soft">兴趣爱好</a>
+                <a href="#projects" class="py-2 font-medium hover:text-sky transition-soft">未来规划</a>
+                <a href="#contact" class="py-2 font-medium hover:text-rose transition-soft">联系方式</a>
             </div>
         </div>
     </header>
 
-    <!-- 英雄区域 -->
-    <section class="pt-32 pb-20 bg-gradient-to-br from-blue-50 to-indigo-50">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 animate-fadeIn">
-                    <h1 class="text-[clamp(2.5rem,7vw,4.5rem)] font-bold leading-tight text-dark mb-4">
-                        你好，我是 <span class="text-primary">苏苏</span>
-                    </h1>
-                    <h2 class="text-[clamp(1.2rem,3vw,1.8rem)] text-gray-600 mb-6">
-                        一个搞物理的爱猫人士
-                    </h2>
-                    <p class="text-base md:text-lg text-gray-700 mb-8 max-w-lg leading-relaxed">
-                        表面柔弱但内心冷酷的杀手，90%时间独处，爱好撸猫和搞钱
-                    </p>
-                </div>
-                <div class="md:w-1/2 flex justify-center animate-fadeIn delay-200">
-                    <div class="relative">
-                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-2xl">
-                            <img src="images/大头照.jpg" alt="个人照片" class="w-full h-full object-cover">
-                        </div>
-                        <!-- 已移除绿色按钮 -->
-                    </div>
-                </div>
+    <!-- ══════════════ 英雄区 · 睡莲流体 ══════════════ -->
+    <section class="relative overflow-hidden" id="monet-fluid-section" style="height:90vh;min-height:600px;">
+        <!-- WebGL 流体画布 -->
+        <canvas id="fluid-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;"></canvas>
+        <!-- 内容层（pointer-events:none 让鼠标穿透到下面的流体画布） -->
+        <div class="container mx-auto px-4 h-full flex items-center" style="position:relative; z-index:10; pointer-events:none;">
+            <div class="animate-fadeIn" style="padding-left:8%;">
+                <p class="text-sage text-sm tracking-widest mb-3 font-medium">WHERE THERE'S A WILL, THERE'S A WAY</p>
+                <h1 class="text-[clamp(3.5rem,9vw,6rem)] font-serif font-bold leading-tight text-shadow mb-4">
+                    你好，我是 <span class="text-lavender">冯思雅</span>
+                </h1>
+                <h2 class="text-[clamp(1.5rem,3.5vw,2.2rem)] text-slate/70 mb-6 font-light">
+                    一个搞大数据处理的物理人
+                </h2>
+                <p class="text-[clamp(1rem,2vw,1.3rem)] text-slate/75 mb-8 max-w-2xl leading-relaxed">
+                    日常工作是从一千万个苹果里挑出唯一一个梨
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- 个人经历 -->
-    <section id="about" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
+    <!-- ══════════════ 个人经历 · 睡莲池畔 ══════════════ -->
+    <section id="about" class="py-24 bg-cream relative z-10">
+        <div class="container mx-auto px-4 relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">个人经历</h2>
-                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-serif font-bold text-shadow mb-4">个人经历</h2>
+                <div class="divider-monet w-32 mx-auto"></div>
             </div>
-            
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2 max-w-md"> <!-- 限制最大宽度 -->
+
+            <div class="flex flex-col md:flex-row items-center gap-14">
+                <div class="md:w-1/2 max-w-md">
                     <div class="relative">
-                        <img src="images/两岁照片.jpg" alt="工作照" class="rounded-lg shadow-xl w-full max-w-sm mx-auto"> <!-- 图片最大宽度调整为sm尺寸 -->
-                        <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-lg shadow-lg">
-                            <p class="text-2xl font-bold text-primary">23年+</p>
-                            <p class="text-gray-600">人间存活经验</p>
+                        <img src="images/两岁照片.jpg" alt="小时候" class="rounded-2xl img-frame w-full max-w-sm mx-auto">
+                        <div class="absolute -bottom-6 -left-6 glass px-6 py-4 rounded-2xl">
+                            <p class="text-3xl font-serif font-bold text-lavender">23 年+</p>
+                            <p class="text-slate/60 text-sm mt-1">人间存活经验</p>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="md:w-1/2">
-                    <h3 class="text-2xl font-bold mb-4 text-dark">我是谁？</h3>
-                    <p class="text-gray-700 mb-6 leading-relaxed">
-                        2002年10月28日，魔童降世
-                    </p>
-                    <p class="text-gray-700 mb-6 leading-relaxed">
+                    <h3 class="text-2xl font-serif font-bold mb-5 text-shadow">我是谁？</h3>
+                    <p class="text-slate/80 mb-4 leading-relaxed">2002年10月28日，魔童降世</p>
+                    <p class="text-slate/70 mb-5 leading-relaxed text-sm space-y-1">
                         幼儿园大班还在尿裤子被我妈揍了<br>
                         小学三年级成绩稀烂但很喜欢我的语文老师<br>
                         六年级终于开窍了保送到当地最好的私立初中<br>
                         八年级第一次知道喜欢是什么感觉<br>
                         九年级快卷成狗了，我真是太配成绩好了<br>
                         高中最期待的是每周六晚上放假，因为可以在寝室看言情小说<br>
-                        高考619分，真正做到百里挑一了<br>
+                        高考 619 分，真正做到百里挑一了<br>
                         大学是物理专业，哇塞怎么没有帅哥，哭晕<br>
                         大三做短视频火了，全网二十多万粉丝<br>
                         大四凉了，但保研了<br>
-                        研一经常翘水课但一次都没被逮到过<br>
+                        研一经常翘水课但一次都没被逮到过
                     </p>
-                    <p class="text-gray-700 mb-6 leading-relaxed">
-                        现在是天蝎座intj大魔王
-                    </p>
-                    
-                    <div class="grid grid-cols-2 gap-4 mb-8">
-                        <div class="flex items-center">
-                            <i class="fa fa-check-circle text-secondary text-xl mr-3"></i>
-                            <span>在无数次绝望中幸存</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fa fa-check-circle text-secondary text-xl mr-3"></i>
-                            <span>物欲不高但喜欢赚钱</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fa fa-check-circle text-secondary text-xl mr-3"></i>
-                            <span>小兔子537的家长</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fa fa-check-circle text-secondary text-xl mr-3"></i>
-                            <span>喜欢独处也喜欢吵闹</span>
-                        </div>
+                    <p class="text-slate/80 mb-8 leading-relaxed">现在是天蝎座 INTJ 大魔王</p>
+
+                    <div class="grid grid-cols-2 gap-3 mb-8">
+                        <div class="flex items-center gap-2"><i class="fa fa-circle text-lavender text-[6px]"></i><span class="text-sm text-slate/75">在无数次绝望中幸存</span></div>
+                        <div class="flex items-center gap-2"><i class="fa fa-circle text-sage text-[6px]"></i><span class="text-sm text-slate/75">物欲不高但喜欢赚钱</span></div>
+                        <div class="flex items-center gap-2"><i class="fa fa-circle text-sky text-[6px]"></i><span class="text-sm text-slate/75">小兔子537的家长</span></div>
+                        <div class="flex items-center gap-2"><i class="fa fa-circle text-rose text-[6px]"></i><span class="text-sm text-slate/75">喜欢独处也喜欢吵闹</span></div>
                     </div>
-                    
-                    <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
-                        下载我的简历
-                        <i class="fa fa-download ml-2"></i>
+
+                    <a href="#" class="text-lavender font-medium hover:underline inline-flex items-center gap-1 text-sm">
+                        <i class="fa fa-download"></i> 下载我的简历
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 兴趣爱好 -->
-    <section id="skills" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
+    <!-- ══════════════ 兴趣爱好 · 紫藤花架 ══════════════ -->
+    <section id="skills" class="py-24 bg-monet-wisteria relative z-10">
+        <div class="container mx-auto px-4 relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">兴趣爱好</h2>
-                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
-                    唯一喜欢的东西是猫，唯一向往的工作是不劳而获
-                </p>
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-serif font-bold text-shadow mb-4">兴趣爱好</h2>
+                <div class="divider-monet w-32 mx-auto"></div>
+                <p class="text-slate/55 mt-4 max-w-xl mx-auto text-sm">唯一喜欢的东西是猫，唯一向往的工作是不劳而获</p>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- 技能卡片1 - 电子竞技 -->
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-custom">
-                    <div class="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fa fa-gamepad text-2xl text-purple-600"></i>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 电子竞技 -->
+                <div class="glass rounded-2xl p-8 transition-soft hover:shadow-lg">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(155,142,196,0.18)">
+                        <i class="fa fa-gamepad text-xl text-lavender"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-dark">电子竞技</h3>
-                    <p class="text-gray-600 mb-6">
+                    <h3 class="text-lg font-serif font-bold mb-2 text-shadow">电子竞技</h3>
+                    <p class="text-slate/60 text-sm mb-4 leading-relaxed">
                         热爱各种竞技类型手游，其实是闲的无聊且啥都想试试。有一丢丢游戏天赋且专注度很高，所以玩什么都可以小小成。
                     </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">王者荣耀省级蔡文姬、朵利亚</span>
-                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">金铲铲S14赛季王者</span>
-                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">月圆之夜北京市前十</span>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="tag-lavender text-xs px-2.5 py-1 rounded-full">王者荣耀省级蔡文姬、朵利亚</span>
+                        <span class="tag-sage text-xs px-2.5 py-1 rounded-full">金铲铲 S14 赛季王者</span>
+                        <span class="tag-sky text-xs px-2.5 py-1 rounded-full">月圆之夜北京市前十</span>
                     </div>
                 </div>
-                
-                <!-- 技能卡片2 - 恢复性睡眠 -->
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-custom">
-                    <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fa fa-moon-o text-2xl text-indigo-600"></i>
+
+                <!-- 恢复性睡眠 -->
+                <div class="glass rounded-2xl p-8 transition-soft hover:shadow-lg">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(139,168,154,0.18)">
+                        <i class="fa fa-moon-o text-xl text-sage"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-dark">恢复性睡眠</h3>
-                    <p class="text-gray-600 mb-6">
-                        最喜欢睡觉，最长睡眠记录达十四小时。十分认可睡眠是短暂的死亡，而活着是一场长久的失眠。
+                    <h3 class="text-lg font-serif font-bold mb-2 text-shadow">恢复性睡眠</h3>
+                    <p class="text-slate/60 text-sm mb-4 leading-relaxed">
+                        最喜欢睡觉，最长记录达十四小时。睡眠是短暂的死亡，而活着是一场长久的失眠。
                     </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">喜欢做有帅哥的梦</span>
-                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">有美女也不是不行</span>
-                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">实际上经常梦到在大逃杀T.T</span>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="tag-sage text-xs px-2.5 py-1 rounded-full">喜欢做有帅哥的梦</span>
+                        <span class="tag-rose text-xs px-2.5 py-1 rounded-full">有美女也不是不行</span>
+                        <span class="tag-lavender text-xs px-2.5 py-1 rounded-full">经常梦到大逃杀 T.T</span>
                     </div>
                 </div>
-                
-                <!-- 技能卡片3 - 海鲜美食 -->
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-custom">
-                    <div class="w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fa fa-cutlery text-2xl text-orange-600"></i>
+
+                <!-- 海鲜 -->
+                <div class="glass rounded-2xl p-8 transition-soft hover:shadow-lg">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(212,165,165,0.18)">
+                        <i class="fa fa-cutlery text-xl text-rose"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-dark">ci各种海鲜</h3>
-                    <p class="text-gray-600 mb-6">
-                        海鲜嚎ci，我cicicicicici......最喜欢蒜蓉生蚝，但是好贵啊呜呜呜呜呜。只吃熟海鲜，不吃生海鲜，yueyueyueyueyueyue......
+                    <h3 class="text-lg font-serif font-bold mb-2 text-shadow">ci 各种海鲜</h3>
+                    <p class="text-slate/60 text-sm mb-4 leading-relaxed">
+                        海鲜嚎 ci，我 cicicicicici……最喜欢蒜蓉生蚝，但是好贵啊呜呜。只吃熟海鲜，不吃生海鲜，yueyueyue……
                     </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">波士顿龙虾</span>
-                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">超级大生蚝🦪</span>
-                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">无敌大扇贝</span>
-                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full">鱿鱼吃多了不想吃了</span>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="tag-rose text-xs px-2.5 py-1 rounded-full">波士顿龙虾</span>
+                        <span class="tag-peach text-xs px-2.5 py-1 rounded-full">超级大生蚝🦪</span>
+                        <span class="tag-sage text-xs px-2.5 py-1 rounded-full">无敌大扇贝</span>
+                        <span class="tag-sky text-xs px-2.5 py-1 rounded-full">鱿鱼吃多了不想吃了</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 未来规划 -->
-    <section id="projects" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
+    <!-- ══════════════ 未来规划 · 睡莲画廊 ══════════════ -->
+    <section id="projects" class="py-24 bg-cream relative z-10">
+        <div class="container mx-auto px-4 relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">未来规划</h2>
-                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
-                    最大的愿望是成为快乐健康、有钱有闲的小冯同志
-                </p>
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-serif font-bold text-shadow mb-4">未来规划</h2>
+                <div class="divider-monet w-32 mx-auto"></div>
+                <p class="text-slate/55 mt-4 max-w-xl mx-auto text-sm">最大的愿望是成为快乐健康、有钱有闲的人</p>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- 项目卡片1 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 文字皆有温度 -->
+                <div class="glass rounded-2xl overflow-hidden transition-soft hover:shadow-lg group">
                     <div class="relative overflow-hidden">
-                        <img src="images/hello.jpg" alt="文字皆有温度" class="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <a href="#" class="bg-white text-primary px-4 py-2 rounded-lg font-medium">查看详情</a>
+                        <img src="images/hello.jpg" alt="文字皆有温度" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-lavender/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-white font-medium text-sm tracking-wider">查看详情</span>
                         </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-dark">文字皆有温度</h3>
-                        <p class="text-gray-600 mb-4">
-                            从小就爱看韩剧，经常被各种文字感动的稀里哗啦，梦想成为一个有温度的笔者
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">文风朴实</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">偶尔脆弱</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">用文字拥抱自己</span>
+                        <h3 class="text-lg font-serif font-bold mb-2 text-shadow">文字皆有温度</h3>
+                        <p class="text-slate/60 text-sm mb-4">从小就爱看韩剧，经常被各种文字感动得稀里哗啦，梦想成为一个有温度的笔者。</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="tag-lavender text-xs px-2 py-1 rounded-full">文风朴实</span>
+                            <span class="tag-rose text-xs px-2 py-1 rounded-full">偶尔脆弱</span>
+                            <span class="tag-sage text-xs px-2 py-1 rounded-full">用文字拥抱自己</span>
                         </div>
                     </div>
                 </div>
-                
-                <!-- 项目卡片2 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+
+                <!-- 找到一份工作 -->
+                <div class="glass rounded-2xl overflow-hidden transition-soft hover:shadow-lg group">
                     <div class="relative overflow-hidden">
-                        <img src="images/钱来.jpg" alt="找到一份中不溜的工作" class="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <a href="#" class="bg-white text-primary px-4 py-2 rounded-lg font-medium">查看详情</a>
+                        <img src="images/钱来.jpg" alt="工作" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-sage/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-white font-medium text-sm tracking-wider">查看详情</span>
                         </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-dark">找到一份中不溜的工作</h3>
-                        <p class="text-gray-600 mb-4">
-                            赚点小钱，摸会小鱼，一半忙碌，一半喘息
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">maybe老师</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">补药是程序员啊</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">但是年薪一百也不是不行</span>
+                        <h3 class="text-lg font-serif font-bold mb-2 text-shadow">找到一份中不溜的工作</h3>
+                        <p class="text-slate/60 text-sm mb-4">赚点小钱，摸会小鱼，一半忙碌，一半喘息。</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="tag-peach text-xs px-2 py-1 rounded-full">maybe 老师</span>
+                            <span class="tag-sky text-xs px-2 py-1 rounded-full">补药是程序员啊</span>
+                            <span class="tag-lavender text-xs px-2 py-1 rounded-full">但年薪一百也不是不行</span>
                         </div>
                     </div>
                 </div>
-                
-                <!-- 项目卡片3 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+
+                <!-- 养一只小猫 -->
+                <div class="glass rounded-2xl overflow-hidden transition-soft hover:shadow-lg group">
                     <div class="relative overflow-hidden">
-                        <img src="images/小猫.jpg" alt="养一只小茂密" class="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <a href="#" class="bg-white text-primary px-4 py-2 rounded-lg font-medium">查看详情</a>
+                        <img src="images/小猫.jpg" alt="小猫" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-rose/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-white font-medium text-sm tracking-wider">查看详情</span>
                         </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-dark">养一只小茂密</h3>
-                        <p class="text-gray-600 mb-4">
-                            这个世界不能没有小猫，我不能没有小猫！
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">咖啡猫☕️</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">逻辑🐱</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">奶牛猫</span>
+                        <h3 class="text-lg font-serif font-bold mb-2 text-shadow">养一只小茂密</h3>
+                        <p class="text-slate/60 text-sm mb-4">这个世界不能没有小猫，我不能没有小猫！</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="tag-peach text-xs px-2 py-1 rounded-full">咖啡猫 ☕️</span>
+                            <span class="tag-sage text-xs px-2 py-1 rounded-full">逻辑 🐱</span>
+                            <span class="tag-sky text-xs px-2 py-1 rounded-full">奶牛猫</span>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="text-center mt-12">
-                <a href="#" class="inline-block bg-white border border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-lg font-medium transition-custom">
-                    查看更多项目
-                </a>
+                <a href="#" class="btn-monet text-sm">探索更多</a>
             </div>
         </div>
     </section>
 
-    <!-- 联系方式 -->
-    <section id="contact" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
+    <!-- ══════════════ 联系方式 · 晨雾 ══════════════ -->
+    <section id="contact" class="py-24 bg-monet-pond relative z-10">
+        <div class="container mx-auto px-4 relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">联系方式</h2>
-                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
-                    很高兴认识你
-                </p>
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-serif font-bold text-shadow mb-4">联系方式</h2>
+                <div class="divider-monet w-32 mx-auto"></div>
+                <p class="text-slate/55 mt-4 text-sm">很高兴认识你</p>
             </div>
-            
-            <div class="flex justify-center">
-                <div class="w-full max-w-2xl">
-                    <div class="bg-white p-8 rounded-xl shadow-lg">
-                        <h3 class="text-2xl font-bold mb-6 text-dark">联系方式</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                    <i class="fa fa-map-marker text-primary text-xl"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800 mb-1">地址</h4>
-                                    <p class="text-gray-600">可能在地球上的任何一个角落</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                    <i class="fa fa-envelope text-primary text-xl"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800 mb-1">邮箱</h4>
-                                    <p class="text-gray-600">2241167983@qq.com</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                    <i class="fa fa-phone text-primary text-xl"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800 mb-1">电话</h4>
-                                    <p class="text-gray-600">158-9799-5592</p>
-                                </div>
-                            </div>
 
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                    <i class="fa fa-weixin text-primary text-xl"></i>
+            <div class="flex justify-center">
+                <div class="w-full max-w-xl">
+                    <div class="glass rounded-2xl p-8 md:p-10">
+                        <h3 class="text-xl font-serif font-bold mb-8 text-shadow">找到我</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(155,142,196,0.18)">
+                                    <i class="fa fa-map-marker text-lavender"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-gray-800 mb-1">微信</h4>
-                                    <p class="text-gray-600">Crystal10yi
+                                    <p class="text-xs text-slate/40 font-medium tracking-wide mb-0.5">地址</p>
+                                    <p class="text-slate/75 text-sm">可能在地球上的任何一个角落</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(139,168,154,0.18)">
+                                    <i class="fa fa-envelope text-sage"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate/40 font-medium tracking-wide mb-0.5">邮箱</p>
+                                    <p class="text-slate/75 text-sm">2241167983@qq.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(123,165,200,0.18)">
+                                    <i class="fa fa-phone text-sky"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate/40 font-medium tracking-wide mb-0.5">电话</p>
+                                    <p class="text-slate/75 text-sm">158-9799-5592</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(212,165,165,0.18)">
+                                    <i class="fa fa-weixin text-rose"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate/40 font-medium tracking-wide mb-0.5">微信</p>
+                                    <p class="text-slate/75 text-sm">Crystal10yi</p>
                                 </div>
                             </div>
                         </div>
@@ -406,95 +459,58 @@
         </div>
     </section>
 
-    <!-- 页脚 -->
-    <footer class="bg-dark text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <a href="#" class="text-2xl font-bold flex items-center">
-                        <i class="fa fa-user-circle mr-2"></i>
-                        <span>Crystal的网站</span>
-                    </a>
-                    <p class="text-gray-400 mt-2">欢迎来到一个超有意思小女孩的世界</p>
-                </div>
+    <!-- ══════════════ 页脚 · 暮色 ══════════════ -->
+    <footer class="py-14 relative z-10" style="background:linear-gradient(180deg, #3D4554 0%, #2D3544 100%)">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center">
+                <a href="#" class="text-xl font-serif font-bold text-cream/80 mb-3 inline-block">Crystal 的网站</a>
+                <p class="text-cream/35 text-sm">欢迎来到一个超有意思小女孩的世界</p>
             </div>
-            
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2026 我的个人网站. 保留所有权利.</p>
+            <div class="border-t border-cream/10 mt-8 pt-8 text-center">
+                <p class="text-cream/25 text-xs">&copy; 2026 Crystal. 保留所有权利. &nbsp;·&nbsp; Designed with Monet in mind</p>
             </div>
         </div>
     </footer>
 
-    <!-- 返回顶部按钮 -->
-    <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary/90">
-        <i class="fa fa-arrow-up"></i>
+    <!-- 返回顶部 -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 btn-monet w-11 h-11 !p-0 flex items-center justify-center opacity-0 invisible transition-all duration-300 z-50">
+        <i class="fa fa-arrow-up text-sm"></i>
     </button>
 
-    <!-- JavaScript -->
+    <!-- ══════════════ WebGL 流体画布（莫奈睡莲水面） ══════════════ -->
+    <script src="box/monai_shuibowen/script.js" defer></script>
+
+    <!-- ══════════════ JS ══════════════ -->
     <script>
-        // 移动端菜单切换
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
-        
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // 导航栏滚动效果
+        menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
         const navbar = document.getElementById('navbar');
         const backToTop = document.getElementById('back-to-top');
-        
+
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
-                navbar.classList.add('py-2');
-                navbar.classList.remove('py-4');
-                navbar.classList.add('shadow');
-                
-                backToTop.classList.remove('opacity-0', 'invisible');
-                backToTop.classList.add('opacity-100', 'visible');
+                navbar.classList.add('shadow-sm');
+                backToTop.classList.remove('opacity-0','invisible');
+                backToTop.classList.add('opacity-100','visible');
             } else {
-                navbar.classList.add('py-4');
-                navbar.classList.remove('py-2');
-                navbar.classList.remove('shadow');
-                
-                backToTop.classList.add('opacity-0', 'invisible');
-                backToTop.classList.remove('opacity-100', 'visible');
+                navbar.classList.remove('shadow-sm');
+                backToTop.classList.add('opacity-0','invisible');
+                backToTop.classList.remove('opacity-100','visible');
             }
         });
-        
-        // 返回顶部功能
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // 点击移动端菜单项后关闭菜单
+
+        backToTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
         const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-        
-        // 滚动动画
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('section > div > div');
-            
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('animate-fadeIn');
-                }
-            });
-        };
-        
-        window.addEventListener('scroll', animateOnScroll);
-        // 初始加载时执行一次
-        animateOnScroll();
+        mobileLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+        /* 滚动淡入 */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('animate-fadeIn'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('section > div > div').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
