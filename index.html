@@ -35,7 +35,7 @@
     </script>
 
     <style>
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
 
         /* ── 印象派光斑背景 ── */
         body {
@@ -228,6 +228,8 @@
             overflow: hidden;
             cursor: grab;
             padding: 20px 0 40px;
+            width: 100%;
+            max-width: 100vw;
         }
         .gallery-viewport:active {
             cursor: grabbing;
