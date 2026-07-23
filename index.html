@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crystal的个人网站 · 印象</title>
+    <title>S.Feng的人生画廊</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
@@ -81,10 +81,10 @@
             border: 1px solid rgba(255,255,255,0.6);
         }
         .glass-nav {
-            background: rgba(251,247,240,0.72);
+            background: rgba(62,36,21,0.90);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(155,142,196,0.15);
+            border-bottom: 1px solid rgba(232,201,160,0.15);
         }
 
         /* ── 标题装饰线 ── */
@@ -153,6 +153,311 @@
             box-shadow: 0 4px 20px rgba(155,142,196,0.5);
             transform: translateY(-1px);
         }
+
+        /* ── 人生画廊 ── */
+        .gallery-section {
+            position: relative;
+            z-index: 10;
+            background: linear-gradient(175deg, #5C3D2E 0%, #4A2E1E 40%, #3E2415 100%);
+            padding: 80px 0 60px;
+            overflow: hidden;
+            user-select: none;
+        }
+        /* 射灯 */
+        .gallery-spotlight {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            max-width: 900px;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(ellipse at 50% 0%, rgba(251,247,240,0.10) 0%, rgba(232,201,160,0.06) 30%, transparent 70%);
+        }
+        /* 标题区 */
+        .gallery-header {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        /* ── 画廊箭头（悬浮在视口上） ── */
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(251,247,240,0.08);
+            color: rgba(251,247,240,0.40);
+            font-size: 15px;
+            transition: background 0.3s ease, color 0.3s ease;
+            z-index: 5;
+        }
+        .gallery-arrow-left  { left:  12px; }
+        .gallery-arrow-right { right: 12px; }
+        .gallery-arrow:hover {
+            background: rgba(251,247,240,0.18);
+            color: rgba(251,247,240,0.75);
+        }
+        .gallery-arrow:active {
+            background: rgba(251,247,240,0.28);
+            color: rgba(251,247,240,0.95);
+        }
+        @media (max-width: 768px) {
+            .gallery-arrow {
+                width: 34px;
+                height: 34px;
+                font-size: 13px;
+            }
+            .gallery-arrow-left  { left:  6px; }
+            .gallery-arrow-right { right: 6px; }
+        }
+        /* 视口 */
+        .gallery-viewport {
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            cursor: grab;
+            padding: 20px 0 40px;
+        }
+        .gallery-viewport:active {
+            cursor: grabbing;
+        }
+        .gallery-viewport.grabbing {
+            cursor: grabbing;
+        }
+        /* 轨道 */
+        .gallery-track {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            padding: 0 calc(50vw - 200px);
+            will-change: transform;
+            transition: none;
+        }
+        /* 单幅画 */
+        .gallery-frame {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            transition: transform 0.35s ease, filter 0.35s ease;
+            cursor: pointer;
+        }
+        .gallery-frame:hover {
+            transform: translateY(-6px);
+        }
+        .gallery-frame:hover .gallery-img-wrap {
+            box-shadow: 0 16px 48px rgba(155,142,196,0.30), 0 0 0 1px rgba(232,201,160,0.25);
+        }
+        /* 画框（莫奈奶油色） */
+        .gallery-img-wrap {
+            position: relative;
+            background: #F5F0E8;
+            padding: 14px 14px 40px 14px;
+            box-shadow: 0 6px 30px rgba(0,0,0,0.25), 0 0 0 1px rgba(232,201,160,0.18);
+            border-radius: 4px;
+            transition: box-shadow 0.4s ease;
+        }
+        .gallery-img-wrap img {
+            display: block;
+            border-radius: 2px;
+            object-fit: cover;
+        }
+        /* 画框底部的画框纹理（模拟木框底部厚一些） */
+        .gallery-img-wrap::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 32px;
+            background: linear-gradient(180deg, rgba(139,120,100,0.12) 0%, rgba(139,120,100,0.25) 100%);
+            border-radius: 0 0 3px 3px;
+            pointer-events: none;
+        }
+        /* 标签牌 */
+        .gallery-label {
+            text-align: center;
+            background: rgba(251,247,240,0.10);
+            border: 1px solid rgba(251,247,240,0.12);
+            border-radius: 6px;
+            padding: 6px 14px;
+            min-width: 100px;
+            transition: background 0.35s ease, border-color 0.35s ease;
+        }
+        .gallery-frame:hover .gallery-label {
+            background: rgba(251,247,240,0.16);
+            border-color: rgba(232,201,160,0.30);
+        }
+        .gallery-label .label-title {
+            font-family: 'Noto Serif SC', Georgia, serif;
+            font-size: 13px;
+            color: #E8C9A0;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .gallery-label .label-year {
+            font-size: 11px;
+            color: rgba(251,247,240,0.45);
+            margin-top: 1px;
+        }
+        /* 地面 */
+        .gallery-floor {
+            position: relative;
+            z-index: 2;
+            height: 4px;
+            background: linear-gradient(90deg, transparent 5%, rgba(251,247,240,0.12) 20%, rgba(251,247,240,0.18) 50%, rgba(251,247,240,0.12) 80%, transparent 95%);
+            border-radius: 2px;
+            margin: 0 10%;
+        }
+
+        /* ── 画作弹窗 ── */
+        .gallery-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(30,34,42,0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .gallery-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .gallery-modal {
+            display: flex;
+            background: #FBF7F0;
+            border-radius: 16px;
+            overflow: hidden;
+            max-width: 900px;
+            width: 90vw;
+            max-height: 85vh;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.40);
+            transform: scale(0.92);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .gallery-modal-overlay.active .gallery-modal {
+            transform: scale(1);
+        }
+        /* 左边：画 */
+        .gallery-modal-left {
+            flex: 0 0 50%;
+            background: #F5F0E8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            position: relative;
+        }
+        .gallery-modal-left img {
+            max-width: 100%;
+            max-height: 65vh;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        /* 右边：信 */
+        .gallery-modal-right {
+            flex: 0 0 50%;
+            padding: 40px 36px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        .gallery-modal-right .letter-period {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #9B8EC4;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .gallery-modal-right .letter-title {
+            font-family: 'Noto Serif SC', Georgia, serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #3D4554;
+            margin-bottom: 8px;
+        }
+        .gallery-modal-right .letter-year {
+            font-size: 13px;
+            color: #8BA89A;
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+        .gallery-modal-right .letter-body {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #4A5568;
+            flex: 1;
+        }
+        .gallery-modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.45);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: background 0.3s ease;
+            z-index: 10;
+        }
+        .gallery-modal-close:hover {
+            background: rgba(0,0,0,0.65);
+        }
+
+        /* ── 手机适配 ── */
+        @media (max-width: 768px) {
+            .gallery-section { padding: 60px 0 40px; }
+            .gallery-track { gap: 40px; padding: 0 calc(50vw - 120px); }
+            .gallery-img-wrap { padding: 10px 10px 28px 10px; }
+            .gallery-img-wrap::after { height: 24px; }
+            .gallery-label .label-title { font-size: 12px; }
+            .gallery-label .label-year { font-size: 10px; }
+            .gallery-label { padding: 4px 10px; }
+            .gallery-modal {
+                flex-direction: column;
+                max-height: 92vh;
+                width: 94vw;
+            }
+            .gallery-modal-left {
+                flex: 0 0 auto;
+                padding: 24px 24px 12px;
+            }
+            .gallery-modal-left img {
+                max-height: 40vh;
+            }
+            .gallery-modal-right {
+                flex: 0 0 auto;
+                padding: 20px 24px 32px;
+            }
+            .gallery-modal-right .letter-title { font-size: 20px; }
+            .gallery-modal-right .letter-body { font-size: 14px; }
+        }
     </style>
 </head>
 
@@ -166,41 +471,41 @@
     <!-- ══════════════ 导航栏 ══════════════ -->
     <header id="navbar" class="fixed w-full glass-nav z-50 transition-all duration-300">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-serif font-bold text-lavender flex items-center gap-2">
+            <a href="#" class="text-2xl font-serif font-bold text-cream flex items-center gap-2">
                 <span>🎨</span>
-                <span>Crystal</span>
+                <span>S.Feng</span>
             </a>
 
             <nav class="hidden md:flex space-x-8 text-sm tracking-wide">
-                <a href="#about" class="font-medium text-slate hover:text-lavender transition-soft">个人经历</a>
-                <a href="#skills" class="font-medium text-slate hover:text-sage transition-soft">兴趣爱好</a>
-                <a href="#projects" class="font-medium text-slate hover:text-sky transition-soft">未来规划</a>
-                <a href="#contact" class="font-medium text-slate hover:text-rose transition-soft">联系方式</a>
+                <a href="#about" class="font-medium text-cream/80 hover:text-peach transition-soft">个人经历</a>
+                <a href="#skills" class="font-medium text-cream/80 hover:text-peach transition-soft">兴趣爱好</a>
+                <a href="#projects" class="font-medium text-cream/80 hover:text-peach transition-soft">未来规划</a>
+                <a href="#contact" class="font-medium text-cream/80 hover:text-peach transition-soft">联系方式</a>
             </nav>
 
-            <button id="menu-toggle" class="md:hidden text-slate focus:outline-none">
+            <button id="menu-toggle" class="md:hidden text-cream focus:outline-none">
                 <i class="fa fa-bars text-xl"></i>
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-cream/90 backdrop-blur-xl border-t border-lavender/15">
+        <div id="mobile-menu" class="hidden md:hidden bg-[#3E2415]/95 backdrop-blur-xl border-t border-peach/15">
             <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
-                <a href="#about" class="py-2 font-medium hover:text-lavender transition-soft">个人经历</a>
-                <a href="#skills" class="py-2 font-medium hover:text-sage transition-soft">兴趣爱好</a>
-                <a href="#projects" class="py-2 font-medium hover:text-sky transition-soft">未来规划</a>
-                <a href="#contact" class="py-2 font-medium hover:text-rose transition-soft">联系方式</a>
+                <a href="#about" class="py-2 font-medium text-cream/80 hover:text-peach transition-soft">个人经历</a>
+                <a href="#skills" class="py-2 font-medium text-cream/80 hover:text-peach transition-soft">兴趣爱好</a>
+                <a href="#projects" class="py-2 font-medium text-cream/80 hover:text-peach transition-soft">未来规划</a>
+                <a href="#contact" class="py-2 font-medium text-cream/80 hover:text-peach transition-soft">联系方式</a>
             </div>
         </div>
     </header>
 
     <!-- ══════════════ 英雄区 · 睡莲流体 ══════════════ -->
-    <section class="relative overflow-hidden" id="monet-fluid-section" style="height:90vh;min-height:600px;">
+    <section class="relative overflow-hidden" id="monet-fluid-section" style="height:92vh;min-height:610px;">
         <!-- WebGL 流体画布 -->
         <canvas id="fluid-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;"></canvas>
         <!-- 内容层（pointer-events:none 让鼠标穿透到下面的流体画布） -->
         <div class="container mx-auto px-4 h-full flex items-center" style="position:relative; z-index:10; pointer-events:none;">
             <div class="animate-fadeIn" style="padding-left:8%;">
-                <p class="text-sage text-sm tracking-widest mb-3 font-medium">WHERE THERE'S A WILL, THERE'S A WAY</p>
+                <p class="text-sm tracking-widest mb-3 font-medium" style="color:#8B6B4D;">WHERE THERE'S A WILL, THERE'S A WAY</p>
                 <h1 class="text-[clamp(3.5rem,9vw,6rem)] font-serif font-bold leading-tight text-shadow mb-4">
                     你好，我是 <span class="text-lavender">冯思雅</span>
                 </h1>
@@ -218,56 +523,35 @@
         </div>
     </section>
 
-    <!-- ══════════════ 个人经历 · 睡莲池畔 ══════════════ -->
-    <section id="about" class="py-24 bg-cream relative z-10">
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-serif font-bold text-shadow mb-4">个人经历</h2>
-                <div class="divider-monet w-32 mx-auto"></div>
-            </div>
+    <!-- ══════════════ 个人经历 · 人生画廊 ══════════════ -->
+    <section id="about" class="gallery-section">
+        <!-- 展厅射灯 -->
+        <div class="gallery-spotlight"></div>
 
-            <div class="flex flex-col md:flex-row items-center gap-14">
-                <div class="md:w-1/2 max-w-md">
-                    <div class="relative">
-                        <img src="images/两岁照片.jpg" alt="小时候" class="rounded-2xl img-frame w-full max-w-sm mx-auto">
-                        <div class="absolute -bottom-6 -left-6 glass px-6 py-4 rounded-2xl">
-                            <p class="text-3xl font-serif font-bold text-lavender">23 年+</p>
-                            <p class="text-slate/60 text-sm mt-1">人间存活经验</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="md:w-1/2">
-                    <h3 class="text-2xl font-serif font-bold mb-5 text-shadow">我是谁？</h3>
-                    <p class="text-slate/80 mb-4 leading-relaxed">2002年10月28日，魔童降世</p>
-                    <p class="text-slate/70 mb-5 leading-relaxed text-sm space-y-1">
-                        幼儿园大班还在尿裤子被我妈揍了<br>
-                        小学三年级成绩稀烂但很喜欢我的语文老师<br>
-                        六年级终于开窍了保送到当地最好的私立初中<br>
-                        八年级第一次知道喜欢是什么感觉<br>
-                        九年级快卷成狗了，我真是太配成绩好了<br>
-                        高中最期待的是每周六晚上放假，因为可以在寝室看言情小说<br>
-                        高考 619 分，真正做到百里挑一了<br>
-                        大学是物理专业，哇塞怎么没有帅哥，哭晕<br>
-                        大三做短视频火了，全网二十多万粉丝<br>
-                        大四凉了，但保研了<br>
-                        研一经常翘水课但一次都没被逮到过
-                    </p>
-                    <p class="text-slate/80 mb-8 leading-relaxed">现在是天蝎座 INTJ 大魔王</p>
-
-                    <div class="grid grid-cols-2 gap-3 mb-8">
-                        <div class="flex items-center gap-2"><i class="fa fa-circle text-lavender text-[6px]"></i><span class="text-sm text-slate/75">在无数次绝望中幸存</span></div>
-                        <div class="flex items-center gap-2"><i class="fa fa-circle text-sage text-[6px]"></i><span class="text-sm text-slate/75">物欲不高但喜欢赚钱</span></div>
-                        <div class="flex items-center gap-2"><i class="fa fa-circle text-sky text-[6px]"></i><span class="text-sm text-slate/75">小兔子537的家长</span></div>
-                        <div class="flex items-center gap-2"><i class="fa fa-circle text-rose text-[6px]"></i><span class="text-sm text-slate/75">喜欢独处也喜欢吵闹</span></div>
-                    </div>
-
-                    <a href="#" class="text-lavender font-medium hover:underline inline-flex items-center gap-1 text-sm">
-                        <i class="fa fa-download"></i> 下载我的简历
-                    </a>
-                </div>
-            </div>
+        <div class="gallery-header">
+            <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-serif font-bold mb-4" style="color:#FBF7F0;">个人经历</h2>
+            <div class="divider-monet w-32 mx-auto"></div>
+            <p class="text-cream/40 mt-3 text-sm tracking-wider">人生画廊 · 点击任意画作，阅读背后的故事</p>
         </div>
+
+        <div class="gallery-viewport" id="gallery-viewport">
+            <div class="gallery-track" id="gallery-track">
+                <!-- 照片由 JS 动态渲染 -->
+            </div>
+
+            <!-- 左箭头 -->
+            <button class="gallery-arrow gallery-arrow-left" id="gallery-arrow-left" aria-label="向左滚动">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <!-- 右箭头 -->
+            <button class="gallery-arrow gallery-arrow-right" id="gallery-arrow-right" aria-label="向右滚动">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- 画廊地面线 -->
+        <div class="gallery-floor"></div>
+    </section>
     </section>
 
     <!-- ══════════════ 兴趣爱好 · 紫藤花架 ══════════════ -->
@@ -467,7 +751,7 @@
     <footer class="py-14 relative z-10" style="background:linear-gradient(180deg, #3D4554 0%, #2D3544 100%)">
         <div class="container mx-auto px-4 relative z-10">
             <div class="text-center">
-                <a href="#" class="text-xl font-serif font-bold text-cream/80 mb-3 inline-block">Crystal 的网站</a>
+                <a href="#" class="text-xl font-serif font-bold text-cream/80 mb-3 inline-block">S.Feng 的人生画廊</a>
                 <p class="text-cream/35 text-sm">欢迎来到一个超有意思小女孩的世界</p>
             </div>
             <div class="border-t border-cream/10 mt-8 pt-8 text-center">
@@ -475,6 +759,24 @@
             </div>
         </div>
     </footer>
+
+    <!-- ══════════════ 画作弹窗 · 读信 ══════════════ -->
+    <div class="gallery-modal-overlay" id="gallery-modal-overlay">
+        <div class="gallery-modal" id="gallery-modal">
+            <div class="gallery-modal-left">
+                <img src="" alt="" id="modal-img">
+            </div>
+            <div class="gallery-modal-right">
+                <p class="letter-period" id="modal-period"></p>
+                <h3 class="letter-title" id="modal-title"></h3>
+                <p class="letter-year" id="modal-year"></p>
+                <div class="letter-body" id="modal-body"></div>
+            </div>
+        </div>
+        <button class="gallery-modal-close" id="gallery-modal-close" aria-label="关闭">
+            <i class="fa fa-times"></i>
+        </button>
+    </div>
 
     <!-- 返回顶部 -->
     <button id="back-to-top" class="fixed bottom-8 right-8 btn-monet w-11 h-11 !p-0 flex items-center justify-center opacity-0 invisible transition-all duration-300 z-50">
@@ -486,35 +788,330 @@
 
     <!-- ══════════════ JS ══════════════ -->
     <script>
+        // ── 导航 & 返回顶部 ──
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
         const navbar = document.getElementById('navbar');
-        const backToTop = document.getElementById('back-to-top');
+        const backToTopBtn = document.getElementById('back-to-top');
 
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
                 navbar.classList.add('shadow-sm');
-                backToTop.classList.remove('opacity-0','invisible');
-                backToTop.classList.add('opacity-100','visible');
+                backToTopBtn.classList.remove('opacity-0','invisible');
+                backToTopBtn.classList.add('opacity-100','visible');
             } else {
                 navbar.classList.remove('shadow-sm');
-                backToTop.classList.add('opacity-0','invisible');
-                backToTop.classList.remove('opacity-100','visible');
+                backToTopBtn.classList.add('opacity-0','invisible');
+                backToTopBtn.classList.remove('opacity-100','visible');
             }
         });
 
-        backToTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+        backToTopBtn.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
 
         const mobileLinks = mobileMenu.querySelectorAll('a');
         mobileLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
 
-        /* 滚动淡入 */
+        // ── 人生画廊 ──
+        const galleryData = [
+            {
+                id: 'childhood',
+                period: '两岁',
+                title: '两岁',
+                year: '2004',
+                img: 'images/个人经历/两岁照片.jpg',
+                sizes: { w: 280, h: 310 },
+                letter: '后续会补充更多故事……'
+            },
+            {
+                id: 'highschool',
+                period: '高二',
+                title: '高二',
+                year: '2018',
+                img: 'images/个人经历/高中.JPG',
+                sizes: { w: 185, h: 210 },
+                letter: '后续会补充更多故事……'
+            },
+            {
+                id: 'freshman',
+                period: '大一',
+                title: '大一',
+                year: '2021',
+                img: 'images/个人经历/大一.jpg',
+                sizes: { w: 260, h: 300 },
+                letter: '后续会补充更多故事……'
+            },
+            {
+                id: 'sophomore',
+                period: '大三',
+                title: '大三',
+                year: '2023',
+                img: 'images/个人经历/大二.jpg',
+                sizes: { w: 170, h: 195 },
+                letter: '后续会补充更多故事……'
+            },
+            {
+                id: 'graduation',
+                period: '大四毕业',
+                title: '大四毕业',
+                year: '2024',
+                img: 'images/个人经历/毕业.jpeg',
+                sizes: { w: 280, h: 310 },
+                letter: '后续会补充更多故事……'
+            },
+            {
+                id: 'grad',
+                period: '研二',
+                title: '研二',
+                year: '2026',
+                img: 'images/个人经历/研究生.jpeg',
+                sizes: { w: 215, h: 250 },
+                letter: '后续会补充更多故事……'
+            },
+        ];
+
+        const track = document.getElementById('gallery-track');
+        const viewport = document.getElementById('gallery-viewport');
+        const modalOverlay = document.getElementById('gallery-modal-overlay');
+        const modalImg = document.getElementById('modal-img');
+        const modalPeriod = document.getElementById('modal-period');
+        const modalTitle = document.getElementById('modal-title');
+        const modalYear = document.getElementById('modal-year');
+        const modalBody = document.getElementById('modal-body');
+        const modalClose = document.getElementById('gallery-modal-close');
+
+        const arrowLeft = document.getElementById('gallery-arrow-left');
+        const arrowRight = document.getElementById('gallery-arrow-right');
+
+        // ── 渲染画作（两组用于无缝循环） ──
+        function renderFrame(data) {
+            const frame = document.createElement('div');
+            frame.className = 'gallery-frame';
+            frame.dataset.id = data.id;
+            frame.innerHTML = `
+                <div class="gallery-img-wrap">
+                    <img src="${data.img}" alt="${data.title}" width="${data.sizes.w}" height="${data.sizes.h}" draggable="false">
+                </div>
+                <div class="gallery-label">
+                    <div class="label-title">${data.period}</div>
+                    <div class="label-year">${data.year}</div>
+                </div>
+            `;
+            frame.addEventListener('click', (e) => {
+                if (wasDragging) return;
+                openModal(data);
+            });
+            return frame;
+        }
+
+        // 渲染两组用于无限循环
+        galleryData.forEach(d => track.appendChild(renderFrame(d)));
+        galleryData.forEach(d => track.appendChild(renderFrame(d)));
+
+        // ── 弹窗 ──
+        function openModal(data) {
+            pauseScroll = true;
+            modalImg.src = data.img;
+            modalImg.alt = data.title;
+            modalPeriod.textContent = data.period;
+            modalTitle.textContent = data.title;
+            modalYear.textContent = data.year;
+            modalBody.innerHTML = data.letter.replace(/\n/g, '<br>');
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            pauseScroll = false;
+            lastTime = null;
+            requestAnimationFrame(autoScroll);
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
+        });
+
+        // ── 自动滚动（无缝循环） ──
+        let offset = 0;             // px
+        const SPEED = 0.04;         // px/ms （稍快）
+        let lastTime = null;
+        let pauseScroll = false;
+        let wasDragging = false;
+        let setWidth = 0;           // 一组照片的总宽度（含gap）
+
+        let rafId = null;
+
+        function calcSetWidth() {
+            const frames = track.querySelectorAll('.gallery-frame');
+            if (frames.length === 0) return 0;
+            const frameWidths = [];
+            frames.forEach(f => frameWidths.push(f.getBoundingClientRect().width));
+            // gap 60px between frames
+            const gapPx = 60;
+            const halfCount = frames.length / 2;
+            let total = 0;
+            for (let i = 0; i < halfCount; i++) {
+                total += frameWidths[i] + gapPx;
+            }
+            total -= gapPx; // last one no gap
+            return total;
+        }
+
+        function autoScroll(timestamp) {
+            if (pauseScroll) return;
+            if (!lastTime) lastTime = timestamp;
+            const dt = Math.min(timestamp - lastTime, 50); // cap to avoid jumps when tab switches
+            lastTime = timestamp;
+
+            if (setWidth === 0) setWidth = calcSetWidth();
+            if (setWidth === 0) { rafId = requestAnimationFrame(autoScroll); return; }
+
+            offset += SPEED * dt;
+
+            // 无缝循环：当偏移超过一组宽度时回卷
+            if (offset >= setWidth) {
+                offset -= setWidth;
+            }
+
+            track.style.transform = `translateX(${-offset}px)`;
+            rafId = requestAnimationFrame(autoScroll);
+        }
+
+        // ── 鼠标拖拽 / 触摸滑动 ──
+        let dragging = false;
+        let dragStartX = 0;
+        let dragStartOffset = 0;
+        let dragMoved = false;
+
+        viewport.addEventListener('mousedown', (e) => {
+            dragging = true;
+            wasDragging = false;
+            dragMoved = false;
+            dragStartX = e.clientX;
+            dragStartOffset = offset;
+            pauseScroll = true;
+            lastTime = null;
+            viewport.classList.add('grabbing');
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!dragging) return;
+            const dx = dragStartX - e.clientX;
+            if (Math.abs(dx) > 4) dragMoved = true;
+            offset = dragStartOffset + dx;
+            if (setWidth === 0) setWidth = calcSetWidth();
+            // 无缝卷绕
+            while (offset < 0) offset += setWidth;
+            while (offset >= setWidth) offset -= setWidth;
+            track.style.transform = `translateX(${-offset}px)`;
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (!dragging) return;
+            dragging = false;
+            viewport.classList.remove('grabbing');
+            if (dragMoved) {
+                // 标记此次拖动，防止后续触发 click
+                wasDragging = true;
+                setTimeout(() => { wasDragging = false; }, 200);
+            }
+            pauseScroll = false;
+            lastTime = null;
+            requestAnimationFrame(autoScroll);
+        });
+
+        // 触摸事件
+        viewport.addEventListener('touchstart', (e) => {
+            dragging = true;
+            wasDragging = false;
+            dragMoved = false;
+            dragStartX = e.touches[0].clientX;
+            dragStartOffset = offset;
+            pauseScroll = true;
+            lastTime = null;
+        }, { passive: true });
+
+        viewport.addEventListener('touchmove', (e) => {
+            if (!dragging) return;
+            const dx = dragStartX - e.touches[0].clientX;
+            if (Math.abs(dx) > 4) dragMoved = true;
+            offset = dragStartOffset + dx;
+            if (setWidth === 0) setWidth = calcSetWidth();
+            while (offset < 0) offset += setWidth;
+            while (offset >= setWidth) offset -= setWidth;
+            track.style.transform = `translateX(${-offset}px)`;
+        }, { passive: true });
+
+        viewport.addEventListener('touchend', () => {
+            if (!dragging) return;
+            dragging = false;
+            if (dragMoved) {
+                wasDragging = true;
+                setTimeout(() => { wasDragging = false; }, 200);
+            }
+            pauseScroll = false;
+            lastTime = null;
+            requestAnimationFrame(autoScroll);
+        });
+
+        // ── 箭头按钮：点击移动一整张画的宽度 ──
+        function getAvgFrameWidth() {
+            if (setWidth === 0) return 280;
+            const halfCount = galleryData.length;
+            return setWidth / halfCount;  // 一组总宽 / 张数 ≈ 单张的平均步长
+        }
+
+        arrowLeft.addEventListener('click', () => {
+            const step = getAvgFrameWidth();
+            offset -= step;
+            if (setWidth > 0) {
+                while (offset < 0) offset += setWidth;
+            }
+            track.style.transform = `translateX(${-offset}px)`;
+        });
+
+        arrowRight.addEventListener('click', () => {
+            const step = getAvgFrameWidth();
+            offset += step;
+            if (setWidth > 0) {
+                while (offset >= setWidth) offset -= setWidth;
+            }
+            track.style.transform = `translateX(${-offset}px)`;
+        });
+
+        // ── 启动 ──
+        function startGallery() {
+            setWidth = calcSetWidth();
+            if (setWidth === 0) {
+                // DOM 还未渲染完，稍后重试
+                setTimeout(startGallery, 200);
+                return;
+            }
+            rafId = requestAnimationFrame(autoScroll);
+        }
+        startGallery();
+
+        /* 窗口大小变化时重新计算 */
+        let resizeDebounce;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeDebounce);
+            resizeDebounce = setTimeout(() => {
+                setWidth = calcSetWidth();
+            }, 300);
+        });
+
+        /* 滚动淡入 —— 排除画廊内部元素 */
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('animate-fadeIn'); });
         }, { threshold: 0.1 });
-        document.querySelectorAll('section > div > div').forEach(el => observer.observe(el));
+        document.querySelectorAll('section:not(#about) > div > div').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
