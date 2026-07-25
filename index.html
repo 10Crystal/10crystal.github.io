@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S.Feng的人生画廊</title>
+    <title>冯思雅的人生画廊</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -24,9 +24,12 @@
                         wheat:     '#C9A96E',   /* 金色麦光 */
                         slate:     '#4A5568',   /* 文本灰 */
                         shadow:    '#3D4554',   /* 深色 */
+                        forest:    '#3D6B4C',   /* 森林绿 */
+                        gold:      '#A79B69',   /* 暖金棕 */
+                        meadow:    '#5BAF74',   /* 草甸绿 */
                     },
                     fontFamily: {
-                        serif: ['"Noto Serif SC"', 'Georgia', 'serif'],
+                        serif: ['"ZCOOL XiaoWei"', '"Noto Serif SC"', 'Georgia', 'serif'],
                         sans:  ['"Noto Sans SC"', 'system-ui', 'sans-serif'],
                     },
                 }
@@ -89,10 +92,10 @@
             border: 1px solid rgba(255,255,255,0.6);
         }
         .glass-nav {
-            background: rgba(62,36,21,0.90);
+            background: rgba(155,210,195,0.92);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(232,201,160,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.15);
         }
 
         /* ── 标题装饰线 ── */
@@ -166,7 +169,7 @@
         .gallery-section {
             position: relative;
             z-index: 10;
-            background: linear-gradient(175deg, #5C3D2E 0%, #4A2E1E 40%, #3E2415 100%);
+            background: linear-gradient(175deg, #8EC4B4 0%, #9BD2C3 40%, #A8DBC9 100%);
             padding: 80px 0 60px;
             overflow: hidden;
             user-select: none;
@@ -184,7 +187,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            background: radial-gradient(ellipse at 50% 0%, rgba(251,247,240,0.10) 0%, rgba(232,201,160,0.06) 30%, transparent 70%);
+            background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.18) 0%, rgba(155,210,195,0.10) 30%, transparent 70%);
         }
         /* 标题区 */
         .gallery-header {
@@ -207,8 +210,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(251,247,240,0.08);
-            color: rgba(251,247,240,0.40);
+            background: rgba(74,85,104,0.08);
+            color: rgba(74,85,104,0.40);
             font-size: 15px;
             transition: background 0.3s ease, color 0.3s ease;
             z-index: 5;
@@ -216,12 +219,12 @@
         .gallery-arrow-left  { left:  12px; }
         .gallery-arrow-right { right: 12px; }
         .gallery-arrow:hover {
-            background: rgba(251,247,240,0.18);
-            color: rgba(251,247,240,0.75);
+            background: rgba(74,85,104,0.15);
+            color: rgba(74,85,104,0.70);
         }
         .gallery-arrow:active {
-            background: rgba(251,247,240,0.28);
-            color: rgba(251,247,240,0.95);
+            background: rgba(74,85,104,0.22);
+            color: rgba(74,85,104,0.90);
         }
         @media (max-width: 768px) {
             .gallery-arrow {
@@ -271,7 +274,7 @@
             transform: translateY(-6px);
         }
         .gallery-frame:hover .gallery-img-wrap {
-            box-shadow: 0 16px 48px rgba(155,142,196,0.30), 0 0 0 1px rgba(232,201,160,0.25);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(155,210,195,0.40);
         }
         /* 画框（莫奈奶油色） */
         .gallery-img-wrap {
@@ -302,27 +305,29 @@
         /* 标签牌 */
         .gallery-label {
             text-align: center;
-            background: rgba(251,247,240,0.10);
-            border: 1px solid rgba(251,247,240,0.12);
+            background: rgba(255,255,255,0.50);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.30);
             border-radius: 6px;
             padding: 6px 14px;
             min-width: 100px;
             transition: background 0.35s ease, border-color 0.35s ease;
         }
         .gallery-frame:hover .gallery-label {
-            background: rgba(251,247,240,0.16);
-            border-color: rgba(232,201,160,0.30);
+            background: rgba(255,255,255,0.70);
+            border-color: rgba(255,255,255,0.50);
         }
         .gallery-label .label-title {
-            font-family: 'Noto Serif SC', Georgia, serif;
+            font-family: 'LXGW WenKai', Georgia, serif;
             font-size: 13px;
-            color: #E8C9A0;
+            color: #4A5568;
             font-weight: 600;
             letter-spacing: 0.05em;
         }
         .gallery-label .label-year {
             font-size: 11px;
-            color: rgba(251,247,240,0.45);
+            color: rgba(74,85,104,0.50);
             margin-top: 1px;
         }
         /* 地面 */
@@ -330,7 +335,7 @@
             position: relative;
             z-index: 2;
             height: 4px;
-            background: linear-gradient(90deg, transparent 5%, rgba(251,247,240,0.12) 20%, rgba(251,247,240,0.18) 50%, rgba(251,247,240,0.12) 80%, transparent 95%);
+            background: linear-gradient(90deg, transparent 5%, rgba(255,255,255,0.20) 20%, rgba(255,255,255,0.30) 50%, rgba(255,255,255,0.20) 80%, transparent 95%);
             border-radius: 2px;
             margin: 0 10%;
         }
@@ -403,7 +408,7 @@
             margin-bottom: 8px;
         }
         .gallery-modal-right .letter-title {
-            font-family: 'Noto Serif SC', Georgia, serif;
+            font-family: 'LXGW WenKai', Georgia, serif;
             font-size: 24px;
             font-weight: 700;
             color: #3D4554;
@@ -474,7 +479,7 @@
     </style>
 </head>
 
-<body class="font-sans text-slate antialiased">
+<body class="font-serif text-slate antialiased">
 
     <!-- ══════════════ 浮动的印象派光斑 ══════════════ -->
     <div class="blob blob-1"></div>
@@ -483,51 +488,47 @@
 
     <!-- ══════════════ 导航栏 ══════════════ -->
     <header id="navbar" class="fixed w-full glass-nav z-50 transition-all duration-300">
-        <div class="mx-auto px-4 py-4 flex justify-between items-center" style="max-width:1100px;">
-            <a href="#" class="text-2xl font-serif font-bold text-cream flex items-center gap-2">
+        <div class="mx-auto px-4 py-3.5 flex justify-between items-center" style="max-width:1100px;">
+            <a href="#" class="text-sm font-serif font-bold text-forest flex items-center gap-2">
                 <span>🎨</span>
-                <span>S.Feng</span>
+                <span>冯思雅</span>
             </a>
 
             <nav class="hidden md:flex space-x-8 text-sm tracking-wide">
-                <a href="#about" class="font-medium text-cream/80 hover:text-peach transition-soft">个人经历</a>
-                <a href="#skills" class="font-medium text-cream/80 hover:text-peach transition-soft">兴趣爱好</a>
-                <a href="#projects" class="font-medium text-cream/80 hover:text-peach transition-soft">未来规划</a>
-                <a href="#contact" class="font-medium text-cream/80 hover:text-peach transition-soft">联系方式</a>
+                <a href="#about" class="font-medium text-forest hover:text-white transition-soft">个人经历</a>
+                <a href="#skills" class="font-medium text-forest hover:text-white transition-soft">兴趣爱好</a>
+                <a href="#projects" class="font-medium text-forest hover:text-white transition-soft">未来规划</a>
+                <a href="#contact" class="font-medium text-forest hover:text-white transition-soft">联系方式</a>
             </nav>
 
-            <button id="menu-toggle" class="md:hidden text-cream focus:outline-none">
+            <button id="menu-toggle" class="md:hidden text-forest focus:outline-none">
                 <i class="fa fa-bars text-xl"></i>
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-[#3E2415]/95 backdrop-blur-xl border-t border-peach/15">
-            <div class="mx-auto px-4 py-3 flex flex-col space-y-3" style="max-width:1100px;">
-                <a href="#about" class="py-2 font-medium text-cream/80 hover:text-peach transition-soft">个人经历</a>
-                <a href="#skills" class="py-2 font-medium text-cream/80 hover:text-peach transition-soft">兴趣爱好</a>
-                <a href="#projects" class="py-2 font-medium text-cream/80 hover:text-peach transition-soft">未来规划</a>
-                <a href="#contact" class="py-2 font-medium text-cream/80 hover:text-peach transition-soft">联系方式</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-[#9BD2C3]/95 backdrop-blur-xl border-t border-white/15">
+            <div class="mx-auto px-4 py-3 flex flex-col space-y-2" style="max-width:1100px;">
+                <a href="#about" class="py-2 font-medium text-forest hover:text-white transition-soft">个人经历</a>
+                <a href="#skills" class="py-2 font-medium text-forest hover:text-white transition-soft">兴趣爱好</a>
+                <a href="#projects" class="py-2 font-medium text-forest hover:text-white transition-soft">未来规划</a>
+                <a href="#contact" class="py-2 font-medium text-forest hover:text-white transition-soft">联系方式</a>
             </div>
         </div>
     </header>
 
     <!-- ══════════════ 英雄区 · 睡莲流体 ══════════════ -->
-    <section class="relative overflow-hidden" id="monet-fluid-section" style="height:92vh;min-height:610px;max-width:100vw;">
+    <section class="relative overflow-hidden" id="monet-fluid-section" style="height:95vh;min-height:640px;max-width:100vw;">
         <!-- WebGL 流体画布 -->
         <canvas id="fluid-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;max-width:100%;"></canvas>
         <!-- 内容层（pointer-events:none 让鼠标穿透到下面的流体画布） -->
-        <div class="container mx-auto px-4 h-full flex items-center" style="position:relative; z-index:10; pointer-events:none;">
+        <div class="container mx-auto px-4 h-full flex items-center" style="position:relative; z-index:10; pointer-events:none; padding-bottom:8vh;">
             <div class="animate-fadeIn" style="padding-left:8%;">
-                <p class="text-sm tracking-widest mb-3 font-medium" style="color:#8B6B4D;">WHERE THERE'S A WILL, THERE'S A WAY</p>
                 <h1 class="text-[clamp(3.5rem,9vw,6rem)] font-serif font-bold leading-tight text-shadow mb-4">
-                    你好，我是 <span class="text-lavender">冯思雅</span>
+                    你好，我是 <span class="text-forest">冯思雅</span>
                 </h1>
-                <h2 class="text-[clamp(1.5rem,3.5vw,2.2rem)] text-slate/70 mb-6 font-light">
+                <h2 class="text-[clamp(1.5rem,3.5vw,2.2rem)] text-gold mb-6 font-light">
                     一个搞大数据处理的物理人
                 </h2>
-                <p class="text-[clamp(1rem,2vw,1.3rem)] text-slate/75 mb-8 max-w-2xl leading-relaxed">
-                    日常工作是从一千万个苹果里挑出唯一一个梨
-                </p>
                 <!-- 仅手机端显示：点击继续按钮 -->
                 <a href="#about" class="md:hidden inline-flex items-center gap-2 text-white font-medium text-sm rounded-full px-5 py-2.5 transition-soft" style="pointer-events:auto;background:#5C3D2E;">
                     点击继续 <i class="fa fa-angle-down"></i>
@@ -542,9 +543,9 @@
         <div class="gallery-spotlight"></div>
 
         <div class="gallery-header">
-            <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-serif font-bold mb-4" style="color:#FBF7F0;">个人经历</h2>
+            <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-serif font-bold mb-4 text-slate">个人经历</h2>
             <div class="divider-monet w-32 mx-auto"></div>
-            <p class="text-cream/40 mt-3 text-sm tracking-wider">人生画廊 · 点击任意画作，阅读背后的故事</p>
+            <p class="text-slate/45 mt-3 text-sm tracking-wider">人生画廊 · 点击任意画作，阅读背后的故事</p>
         </div>
 
         <div class="gallery-viewport" id="gallery-viewport">
@@ -764,7 +765,7 @@
     <footer class="py-14 relative z-10" style="background:linear-gradient(180deg, #3D4554 0%, #2D3544 100%)">
         <div class="container mx-auto px-4 relative z-10">
             <div class="text-center">
-                <a href="#" class="text-xl font-serif font-bold text-cream/80 mb-3 inline-block">S.Feng 的人生画廊</a>
+                <a href="#" class="text-xl font-serif font-bold text-cream/80 mb-3 inline-block">冯思雅的人生画廊</a>
                 <p class="text-cream/35 text-sm">欢迎来到一个超有意思小女孩的世界</p>
             </div>
             <div class="border-t border-cream/10 mt-8 pt-8 text-center">
