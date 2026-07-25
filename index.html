@@ -92,10 +92,10 @@
             border: 1px solid rgba(255,255,255,0.6);
         }
         .glass-nav {
-            background: rgba(155,210,195,0.92);
+            background: rgba(94,61,46,0.92);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.15);
+            border-bottom: 1px solid rgba(232,201,160,0.15);
         }
 
         /* ── 标题装饰线 ── */
@@ -489,29 +489,29 @@
     <!-- ══════════════ 导航栏 ══════════════ -->
     <header id="navbar" class="fixed w-full glass-nav z-50 transition-all duration-300">
         <div class="mx-auto px-4 py-3.5 flex justify-between items-center" style="max-width:1100px;">
-            <a href="#" class="text-sm font-serif font-bold text-forest flex items-center gap-2">
+            <a href="#" class="text-sm font-serif font-bold text-cream flex items-center gap-2">
                 <span>🎨</span>
                 <span>冯思雅</span>
             </a>
 
             <nav class="hidden md:flex space-x-8 text-sm tracking-wide">
-                <a href="#about" class="font-medium text-forest hover:text-white transition-soft">个人经历</a>
-                <a href="#skills" class="font-medium text-forest hover:text-white transition-soft">兴趣爱好</a>
-                <a href="#projects" class="font-medium text-forest hover:text-white transition-soft">未来规划</a>
-                <a href="#contact" class="font-medium text-forest hover:text-white transition-soft">联系方式</a>
+                <a href="#about" class="font-medium text-cream/80 hover:text-peach transition-soft">个人经历</a>
+                <a href="#skills" class="font-medium text-cream/80 hover:text-peach transition-soft">兴趣爱好</a>
+                <a href="#projects" class="font-medium text-cream/80 hover:text-peach transition-soft">未来规划</a>
+                <a href="#contact" class="font-medium text-cream/80 hover:text-peach transition-soft">联系方式</a>
             </nav>
 
-            <button id="menu-toggle" class="md:hidden text-forest focus:outline-none">
+            <button id="menu-toggle" class="md:hidden text-cream focus:outline-none">
                 <i class="fa fa-bars text-xl"></i>
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-[#9BD2C3]/95 backdrop-blur-xl border-t border-white/15">
+        <div id="mobile-menu" class="hidden md:hidden bg-[#5C3D2E]/95 backdrop-blur-xl border-t border-peach/15">
             <div class="mx-auto px-4 py-3 flex flex-col space-y-2" style="max-width:1100px;">
-                <a href="#about" class="py-2 font-medium text-forest hover:text-white transition-soft">个人经历</a>
-                <a href="#skills" class="py-2 font-medium text-forest hover:text-white transition-soft">兴趣爱好</a>
-                <a href="#projects" class="py-2 font-medium text-forest hover:text-white transition-soft">未来规划</a>
-                <a href="#contact" class="py-2 font-medium text-forest hover:text-white transition-soft">联系方式</a>
+                <a href="#about" class="py-2 font-medium text-cream/80 hover:text-peach transition-soft">个人经历</a>
+                <a href="#skills" class="py-2 font-medium text-cream/80 hover:text-peach transition-soft">兴趣爱好</a>
+                <a href="#projects" class="py-2 font-medium text-cream/80 hover:text-peach transition-soft">未来规划</a>
+                <a href="#contact" class="py-2 font-medium text-cream/80 hover:text-peach transition-soft">联系方式</a>
             </div>
         </div>
     </header>
@@ -521,14 +521,11 @@
         <!-- WebGL 流体画布 -->
         <canvas id="fluid-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;max-width:100%;"></canvas>
         <!-- 内容层（pointer-events:none 让鼠标穿透到下面的流体画布） -->
-        <div class="container mx-auto px-4 h-full flex items-center" style="position:relative; z-index:10; pointer-events:none; padding-bottom:8vh;">
+        <div class="container mx-auto px-4 h-full flex items-center" style="position:relative; z-index:10; pointer-events:none; padding-bottom:4vh;">
             <div class="animate-fadeIn" style="padding-left:8%;">
                 <h1 class="text-[clamp(3.5rem,9vw,6rem)] font-serif font-bold leading-tight text-shadow mb-4">
                     你好，我是 <span class="text-forest">冯思雅</span>
                 </h1>
-                <h2 class="text-[clamp(1.5rem,3.5vw,2.2rem)] text-gold mb-6 font-light">
-                    一个搞大数据处理的物理人
-                </h2>
                 <!-- 仅手机端显示：点击继续按钮 -->
                 <a href="#about" class="md:hidden inline-flex items-center gap-2 text-white font-medium text-sm rounded-full px-5 py-2.5 transition-soft" style="pointer-events:auto;background:#5C3D2E;">
                     点击继续 <i class="fa fa-angle-down"></i>
