@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>冯思雅的人生画廊</title>
+    <title>冯思雅｜高能物理与数据分析</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" rel="stylesheet">
@@ -124,6 +124,12 @@
         .delay-100 { animation-delay: 0.1s; }
         .delay-200 { animation-delay: 0.2s; }
         .delay-300 { animation-delay: 0.3s; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .animate-fadeIn,
+            .blob { animation: none !important; }
+            .transition-soft { transition: none !important; }
+        }
 
         /* ── 缓慢浮动光斑（模拟水光摇曳） ── */
         @keyframes floatBlob {
@@ -167,6 +173,14 @@
             box-shadow: 0 4px 20px rgba(155,142,196,0.5);
             transform: translateY(-1px);
         }
+        #back-to-top {
+            background: #9A6F4D;
+            box-shadow: 0 3px 14px rgba(110, 75, 50, 0.30);
+        }
+        #back-to-top:hover {
+            background: #875F42;
+            box-shadow: 0 5px 18px rgba(110, 75, 50, 0.38);
+        }
 
         /* ── 英雄区 · 求职介绍 ── */
         .career-hero {
@@ -174,7 +188,7 @@
             min-height: 95vh;
             display: flex;
             align-items: center;
-            padding: 112px 24px 64px;
+            padding: 96px 24px 64px;
             overflow: hidden;
             background: #FCF9F3;
         }
@@ -201,7 +215,7 @@
         }
         .hero-copy {
             position: relative;
-            top: clamp(-18px, -1.4vh, -10px);
+            top: clamp(-36px, -3vh, -20px);
             left: clamp(8px, 1.5vw, 20px);
             max-width: 530px;
             padding-left: clamp(0px, 2vw, 24px);
@@ -312,6 +326,7 @@
         }
         .hero-portrait {
             position: relative;
+            top: clamp(-36px, -3vh, -20px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -371,6 +386,7 @@
                 margin-top: 22px;
             }
             .hero-portrait {
+                top: 0;
                 margin-top: 4px;
             }
             .hero-portrait img {
@@ -408,316 +424,1179 @@
             }
         }
 
-        /* ── 人生画廊 ── */
-        .gallery-section {
+        /* ── 教育经历 · 编辑式时间轴 ── */
+        .education-section {
             position: relative;
             z-index: 10;
-            background: linear-gradient(175deg, #8EC4B4 0%, #9BD2C3 40%, #A8DBC9 100%);
-            padding: 80px 0 60px;
+            padding: clamp(76px, 9vw, 120px) 24px;
             overflow: hidden;
-            user-select: none;
-            width: 100%;
-            max-width: 100vw;
+            background: #E8F0EC;
         }
-        /* 射灯 */
-        .gallery-spotlight {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70%;
-            max-width: 900px;
-            height: 100%;
-            pointer-events: none;
+        .education-shell {
+            position: relative;
             z-index: 1;
-            background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.18) 0%, rgba(155,210,195,0.10) 30%, transparent 70%);
+            width: min(1100px, 100%);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.55fr);
+            gap: clamp(48px, 8vw, 112px);
+            align-items: start;
         }
-        /* 标题区 */
-        .gallery-header {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            margin-bottom: 48px;
-            max-width: 100%;
+        .education-heading {
+            position: sticky;
+            top: 112px;
         }
-        /* ── 画廊箭头（悬浮在视口上） ── */
-        .gallery-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
+        .education-eyebrow {
             display: flex;
             align-items: center;
-            justify-content: center;
-            background: rgba(74,85,104,0.08);
-            color: rgba(74,85,104,0.40);
-            font-size: 15px;
-            transition: background 0.3s ease, color 0.3s ease;
-            z-index: 5;
+            gap: 10px;
+            margin-bottom: 18px;
+            color: #467D78;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
         }
-        .gallery-arrow-left  { left:  12px; }
-        .gallery-arrow-right { right: 12px; }
-        .gallery-arrow:hover {
-            background: rgba(74,85,104,0.15);
-            color: rgba(74,85,104,0.70);
+        .education-eyebrow::before {
+            content: '';
+            width: 28px;
+            height: 2px;
+            border-radius: 999px;
+            background: #EEA16A;
         }
-        .gallery-arrow:active {
-            background: rgba(74,85,104,0.22);
-            color: rgba(74,85,104,0.90);
+        .education-title {
+            margin: 0;
+            color: #303A3A;
+            font-size: clamp(2.35rem, 5vw, 4.3rem);
+            font-weight: 600;
+            line-height: 1.12;
+            letter-spacing: -0.04em;
         }
-        @media (max-width: 768px) {
-            .gallery-arrow {
-                width: 34px;
-                height: 34px;
-                font-size: 13px;
-            }
-            .gallery-arrow-left  { left:  6px; }
-            .gallery-arrow-right { right: 6px; }
+        .education-intro {
+            max-width: 270px;
+            margin-top: 22px;
+            color: rgba(74, 85, 104, 0.62);
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 14px;
+            line-height: 1.85;
         }
-        /* 视口 */
-        .gallery-viewport {
-            position: relative;
-            z-index: 2;
-            overflow: clip;
-            cursor: grab;
-            padding: 20px 0 40px;
-            width: 100%;
-            max-width: 100vw;
+        .education-list {
+            margin: 0;
+            padding: 0;
+            border-top: 1px solid rgba(54, 95, 91, 0.22);
+            list-style: none;
         }
-        .gallery-viewport:active {
-            cursor: grabbing;
+        .education-item {
+            display: grid;
+            grid-template-columns: 136px minmax(0, 1fr);
+            gap: 28px;
+            padding: 36px 0 40px;
+            border-bottom: 1px solid rgba(54, 95, 91, 0.18);
         }
-        .gallery-viewport.grabbing {
-            cursor: grabbing;
+        .education-period {
+            padding-top: 5px;
+            color: #467D78;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.6;
+            letter-spacing: 0.06em;
+            white-space: nowrap;
         }
-        /* 轨道 */
-        .gallery-track {
+        .education-index {
+            display: block;
+            margin-bottom: 14px;
+            color: rgba(70, 125, 120, 0.34);
+            font-family: Georgia, serif;
+            font-size: 28px;
+            font-style: italic;
+            line-height: 1;
+        }
+        .education-school-row {
             display: flex;
-            align-items: center;
-            gap: 60px;
-            padding: 0 calc(50vw - 200px);
-            will-change: transform;
-            transition: none;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
         }
-        /* 单幅画 */
-        .gallery-frame {
+        .education-school {
+            margin: 0;
+            color: #2F5754;
+            font-size: clamp(1.35rem, 2.3vw, 1.8rem);
+            font-weight: 600;
+            line-height: 1.35;
+        }
+        .education-status {
             flex-shrink: 0;
+            padding: 6px 11px;
+            border-radius: 999px;
+            background: rgba(238, 161, 106, 0.14);
+            color: #A3643F;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+        }
+        .education-degree {
+            margin-top: 20px;
+            color: #3D4554;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.7;
+        }
+        .education-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        .education-meta span {
+            padding: 6px 11px;
+            border: 1px solid rgba(70, 125, 120, 0.16);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.48);
+            color: #58706E;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 12px;
+        }
+        .education-courses {
+            margin-top: 18px;
+            color: rgba(74, 85, 104, 0.66);
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 13px;
+            line-height: 1.85;
+        }
+        .education-courses strong {
+            color: rgba(61, 69, 84, 0.82);
+            font-weight: 600;
+        }
+        @media (max-width: 820px) {
+            .education-section {
+                padding: 72px 20px;
+            }
+            .education-shell {
+                grid-template-columns: 1fr;
+                gap: 44px;
+            }
+            .education-heading {
+                position: static;
+            }
+            .education-intro {
+                max-width: 520px;
+            }
+        }
+        @media (max-width: 560px) {
+            .education-section {
+                padding: 60px 18px;
+            }
+            .education-item {
+                grid-template-columns: 1fr;
+                gap: 14px;
+                padding: 30px 0 34px;
+            }
+            .education-period {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .education-index {
+                display: inline;
+                margin: 0;
+                font-size: 22px;
+            }
+            .education-school-row {
+                display: block;
+            }
+            .education-status {
+                display: inline-flex;
+                margin-top: 12px;
+            }
+        }
+
+        /* ── 项目经历 · 科研案例 ── */
+        .research-section {
+            position: relative;
+            z-index: 10;
+            padding: clamp(76px, 9vw, 120px) 24px;
+            overflow: hidden;
+            background: #FCF9F3;
+        }
+        .research-shell {
+            position: relative;
+            z-index: 1;
+            width: min(1120px, 100%);
+            margin: 0 auto;
+        }
+        .research-header {
+            display: grid;
+            grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
+            gap: clamp(36px, 7vw, 96px);
+            align-items: end;
+            margin-bottom: clamp(48px, 7vw, 76px);
+        }
+        .research-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            color: #6B5E8A;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+        .research-eyebrow::before {
+            content: '';
+            width: 28px;
+            height: 2px;
+            border-radius: 999px;
+            background: #EEA16A;
+        }
+        .research-title {
+            margin: 0;
+            color: #303A3A;
+            font-size: clamp(2.35rem, 5vw, 4.3rem);
+            font-weight: 600;
+            line-height: 1.12;
+            letter-spacing: -0.04em;
+        }
+        .research-intro {
+            max-width: 520px;
+            color: rgba(74, 85, 104, 0.65);
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+        .research-stack {
+            display: grid;
+            gap: 28px;
+        }
+        .research-card {
+            display: grid;
+            grid-template-columns: minmax(300px, 0.78fr) minmax(0, 1.35fr);
+            min-height: 410px;
+            overflow: hidden;
+            border: 1px solid rgba(54, 95, 91, 0.13);
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.62);
+            box-shadow: 0 18px 50px rgba(73, 75, 83, 0.08);
+        }
+        .research-card.reverse {
+            grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.78fr);
+        }
+        .research-card.reverse .research-metric {
+            order: 2;
+        }
+        .research-metric {
+            position: relative;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 14px;
-            transition: transform 0.35s ease, filter 0.35s ease;
-            cursor: pointer;
+            justify-content: flex-start;
+            min-width: 0;
+            padding: clamp(30px, 4vw, 48px);
+            overflow: hidden;
+            background: linear-gradient(145deg, #416A66 0%, #507A75 58%, #608984 100%);
+            color: #FFFDF8;
         }
-        .gallery-frame:hover {
-            transform: translateY(-6px);
+        .research-card.reverse .research-metric {
+            background: linear-gradient(145deg, #F2A45F 0%, #FEBF81 60%, #F5D1AA 100%);
+            color: #4D3528;
         }
-        .gallery-frame:hover .gallery-img-wrap {
-            box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(155,210,195,0.40);
-        }
-        /* 画框（莫奈奶油色） */
-        .gallery-img-wrap {
-            position: relative;
-            background: #F5F0E8;
-            padding: 14px 14px 40px 14px;
-            box-shadow: 0 6px 30px rgba(0,0,0,0.25), 0 0 0 1px rgba(232,201,160,0.18);
-            border-radius: 4px;
-            transition: box-shadow 0.4s ease;
-        }
-        .gallery-img-wrap img {
-            display: block;
-            border-radius: 2px;
-            object-fit: cover;
-        }
-        /* 画框底部的画框纹理（模拟木框底部厚一些） */
-        .gallery-img-wrap::after {
+        .research-metric::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 32px;
-            background: linear-gradient(180deg, rgba(139,120,100,0.12) 0%, rgba(139,120,100,0.25) 100%);
-            border-radius: 0 0 3px 3px;
-            pointer-events: none;
+            width: 210px;
+            height: 210px;
+            right: -92px;
+            bottom: -82px;
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 50%;
+            box-shadow: 0 0 0 34px rgba(255,255,255,0.035), 0 0 0 70px rgba(255,255,255,0.025);
         }
-        /* 标签牌 */
-        .gallery-label {
-            text-align: center;
-            background: rgba(255,255,255,0.50);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.30);
-            border-radius: 6px;
-            padding: 6px 14px;
-            min-width: 100px;
-            transition: background 0.35s ease, border-color 0.35s ease;
+        .research-number {
+            position: relative;
+            z-index: 1;
+            color: rgba(255, 253, 248, 0.82);
+            font-family: Georgia, serif;
+            font-size: 18px;
+            font-weight: 600;
+            font-style: italic;
+            letter-spacing: 0.08em;
         }
-        .gallery-frame:hover .gallery-label {
-            background: rgba(255,255,255,0.70);
-            border-color: rgba(255,255,255,0.50);
+        .research-metric-main {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transform: translateY(-7px);
         }
-        .gallery-label .label-title {
-            font-family: 'LXGW WenKai', Georgia, serif;
+        .research-value {
+            display: block;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(3.2rem, 6vw, 5.4rem);
+            font-weight: 500;
+            line-height: 0.98;
+            letter-spacing: -0.055em;
+            white-space: nowrap;
+        }
+        .research-value.compact {
+            font-size: clamp(2.55rem, 4.6vw, 4.1rem);
+            letter-spacing: -0.045em;
+        }
+        .research-value sup {
+            font-size: 0.48em;
+            vertical-align: super;
+        }
+        .research-metric-label {
+            display: block;
+            max-width: 190px;
+            margin-top: 18px;
+            color: rgba(255, 253, 248, 0.86);
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
             font-size: 13px;
-            color: #4A5568;
+            line-height: 1.7;
+            letter-spacing: 0.04em;
+        }
+        .research-card.reverse .research-number,
+        .research-card.reverse .research-metric-label {
+            color: rgba(77, 53, 40, 0.76);
+        }
+        .research-card.reverse .research-value {
+            color: #4D3528;
+        }
+        .research-card.reverse .research-metric::after {
+            border-color: rgba(77, 53, 40, 0.18);
+            box-shadow: 0 0 0 34px rgba(77,53,40,0.035), 0 0 0 70px rgba(77,53,40,0.025);
+        }
+        .research-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+            padding: clamp(34px, 5vw, 60px);
+        }
+        .research-meta-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+        }
+        .research-date {
+            color: rgba(74, 85, 104, 0.5);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+        }
+        .research-status {
+            padding: 6px 11px;
+            border-radius: 999px;
+            background: rgba(238, 161, 106, 0.15);
+            color: #9A5E39;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+        }
+        .research-project-title {
+            margin: 0;
+            color: #2F5754;
+            font-size: clamp(1.45rem, 2.7vw, 2.05rem);
+            font-weight: 600;
+            line-height: 1.38;
+            letter-spacing: -0.025em;
+        }
+        .research-summary {
+            margin-top: 20px;
+            color: rgba(74, 85, 104, 0.68);
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+        .research-method-label {
+            margin-top: 24px;
+            color: rgba(61, 69, 84, 0.78);
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+        .research-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 11px;
+        }
+        .research-tools span {
+            padding: 6px 10px;
+            border: 1px solid rgba(70, 125, 120, 0.15);
+            border-radius: 999px;
+            background: rgba(238, 242, 237, 0.72);
+            color: #58706E;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 11px;
+            line-height: 1.35;
+        }
+        .research-outcome {
+            margin-top: 24px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(54, 95, 91, 0.13);
+            color: #465E5B;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.8;
+        }
+        .research-outcome strong {
+            color: #A3643F;
+            font-weight: 700;
+        }
+        @media (min-width: 1060px) {
+            .research-project-title.long-title {
+                font-size: clamp(1.32rem, 2vw, 1.55rem);
+                letter-spacing: -0.04em;
+                white-space: nowrap;
+            }
+        }
+        @media (max-width: 860px) {
+            .research-header {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+            .research-card,
+            .research-card.reverse {
+                grid-template-columns: 1fr;
+            }
+            .research-card.reverse .research-metric {
+                order: 0;
+            }
+            .research-metric {
+                min-height: 280px;
+            }
+        }
+        @media (max-width: 560px) {
+            .research-section {
+                padding: 60px 18px;
+            }
+            .research-card {
+                min-height: 0;
+                border-radius: 22px;
+            }
+            .research-metric {
+                min-height: 238px;
+                padding: 28px;
+            }
+            .research-content {
+                padding: 30px 24px 34px;
+            }
+            .research-meta-row {
+                align-items: flex-start;
+            }
+            .research-value.compact {
+                font-size: clamp(2.25rem, 11.5vw, 3.2rem);
+            }
+        }
+
+        /* ── Vibe Coding · 产品案例 ── */
+        .vibe-section {
+            position: relative;
+            z-index: 10;
+            padding: clamp(76px, 9vw, 120px) 24px;
+            overflow: hidden;
+            background: #E8F0EC;
+        }
+        .vibe-shell {
+            position: relative;
+            z-index: 1;
+            width: min(1120px, 100%);
+            margin: 0 auto;
+        }
+        .vibe-header {
+            display: grid;
+            grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr);
+            gap: clamp(36px, 7vw, 96px);
+            align-items: end;
+            margin-bottom: clamp(48px, 7vw, 76px);
+        }
+        .vibe-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            color: #6B5E8A;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+        .vibe-eyebrow::before {
+            content: '';
+            width: 28px;
+            height: 2px;
+            border-radius: 999px;
+            background: #55AEB2;
+        }
+        .vibe-title {
+            margin: 0;
+            color: #303A3A;
+            font-size: clamp(2.2rem, 4.2vw, 3.55rem);
+            font-weight: 600;
+            line-height: 1.12;
+            letter-spacing: -0.04em;
+            white-space: nowrap;
+        }
+        .vibe-intro {
+            max-width: 540px;
+            color: rgba(74, 85, 104, 0.68);
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+        .vibe-site-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 16px;
+            color: #55746F;
+            font-size: 12px;
             font-weight: 600;
             letter-spacing: 0.05em;
         }
-        .gallery-label .label-year {
-            font-size: 11px;
-            color: rgba(74,85,104,0.50);
-            margin-top: 1px;
+        .vibe-site-note::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #EEA16A;
+            box-shadow: 0 0 0 5px rgba(238,161,106,0.13);
         }
-        /* 地面 */
-        .gallery-floor {
-            position: relative;
-            z-index: 2;
-            height: 4px;
-            background: linear-gradient(90deg, transparent 5%, rgba(255,255,255,0.20) 20%, rgba(255,255,255,0.30) 50%, rgba(255,255,255,0.20) 80%, transparent 95%);
-            border-radius: 2px;
-            margin: 0 10%;
+        .vibe-stack {
+            display: grid;
+            gap: 30px;
         }
-
-        /* ── 画作弹窗 ── */
-        .gallery-modal-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 200;
-            background: rgba(30,34,42,0.88);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
-        }
-        .gallery-modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .gallery-modal {
-            display: flex;
-            background: #FBF7F0;
-            border-radius: 16px;
+        .vibe-card {
+            display: grid;
+            grid-template-columns: minmax(0, 0.86fr) minmax(460px, 1.14fr);
+            min-height: 560px;
             overflow: hidden;
-            max-width: 900px;
-            width: 90vw;
-            max-height: 85vh;
-            box-shadow: 0 24px 80px rgba(0,0,0,0.40);
-            transform: scale(0.92);
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 1px solid rgba(54, 95, 91, 0.12);
+            border-radius: 32px;
+            background: rgba(255,255,255,0.66);
+            box-shadow: 0 20px 60px rgba(66, 74, 78, 0.09);
         }
-        .gallery-modal-overlay.active .gallery-modal {
-            transform: scale(1);
+        .vibe-card-monet {
+            grid-template-columns: minmax(500px, 1.2fr) minmax(0, 0.8fr);
         }
-        /* 左边：画 */
-        .gallery-modal-left {
-            flex: 0 0 50%;
-            background: #F5F0E8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            position: relative;
-        }
-        .gallery-modal-left img {
-            max-width: 100%;
-            max-height: 65vh;
-            object-fit: contain;
-            border-radius: 4px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
-        /* 右边：信 */
-        .gallery-modal-right {
-            flex: 0 0 50%;
-            padding: 40px 36px;
+        .vibe-content {
             display: flex;
             flex-direction: column;
-            overflow-y: auto;
+            justify-content: center;
+            min-width: 0;
+            padding: clamp(36px, 5vw, 64px);
         }
-        .gallery-modal-right .letter-period {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #9B8EC4;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .gallery-modal-right .letter-title {
-            font-family: 'LXGW WenKai', Georgia, serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: #3D4554;
-            margin-bottom: 8px;
-        }
-        .gallery-modal-right .letter-year {
-            font-size: 13px;
-            color: #8BA89A;
-            margin-bottom: 24px;
-            font-weight: 500;
-        }
-        .gallery-modal-right .letter-body {
-            font-size: 15px;
-            line-height: 1.9;
-            color: #4A5568;
-            flex: 1;
-        }
-        .gallery-modal-close {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: rgba(0,0,0,0.45);
-            color: #fff;
-            border: none;
-            cursor: pointer;
+        .vibe-meta {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            transition: background 0.3s ease;
-            z-index: 10;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 22px;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
         }
-        .gallery-modal-close:hover {
-            background: rgba(0,0,0,0.65);
+        .vibe-index {
+            color: #6B5E8A;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 16px;
+            font-weight: 600;
+            font-style: italic;
+            letter-spacing: 0.08em;
+        }
+        .vibe-platform {
+            padding: 7px 12px;
+            border: 1px solid rgba(70,125,120,0.16);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.52);
+            color: #56716D;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+        }
+        .vibe-project-title {
+            margin: 0;
+            color: #2F5754;
+            font-size: clamp(1.35rem, 6.8vw, 2.25rem);
+            font-weight: 600;
+            line-height: 1.28;
+            letter-spacing: -0.035em;
+            white-space: nowrap;
+        }
+        .vibe-description {
+            margin-top: 20px;
+            color: rgba(74,85,104,0.7);
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+        .vibe-stat {
+            display: flex;
+            align-items: flex-end;
+            gap: 14px;
+            margin-top: 26px;
+            padding: 20px 0;
+            border-top: 1px solid rgba(54,95,91,0.13);
+            border-bottom: 1px solid rgba(54,95,91,0.13);
+        }
+        .vibe-stat strong {
+            color: #467D78;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(2.6rem, 5vw, 4rem);
+            font-weight: 500;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+        }
+        .vibe-stat span {
+            max-width: 120px;
+            color: rgba(74,85,104,0.62);
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 12px;
+            line-height: 1.55;
+        }
+        .vibe-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 24px;
+        }
+        .vibe-tags span {
+            padding: 7px 11px;
+            border-radius: 999px;
+            background: rgba(155,142,196,0.12);
+            color: #675E82;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 11px;
+            line-height: 1.35;
+        }
+        .vibe-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+        .vibe-action {
+            display: inline-flex;
+            min-height: 46px;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 11px 20px;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            background: #467D78;
+            color: #FFFDF8;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1;
+            cursor: pointer;
+            transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+        }
+        .vibe-action:hover {
+            transform: translateY(-2px);
+            background: #3F716D;
+            box-shadow: 0 10px 24px rgba(70,125,120,0.22);
+        }
+        .vibe-action:focus-visible,
+        .vibe-dialog-close:focus-visible {
+            outline: 3px solid rgba(85,174,178,0.45);
+            outline-offset: 3px;
+        }
+        .vibe-action-light {
+            border-color: rgba(238,161,106,0.2);
+            background: #B86F43;
+        }
+        .vibe-action-light:hover {
+            background: #A9633C;
+            box-shadow: 0 10px 24px rgba(184,111,67,0.22);
+        }
+        .vibe-visual {
+            position: relative;
+            min-width: 0;
+            overflow: hidden;
+        }
+        .vibe-phone-stage {
+            min-height: 560px;
+            background:
+                radial-gradient(circle at 18% 20%, rgba(255,255,255,0.82), transparent 28%),
+                linear-gradient(145deg, #DCEAE4 0%, #D9E7E5 46%, #E5DFEC 100%);
+        }
+        .vibe-phone-stage::before,
+        .vibe-phone-stage::after {
+            content: '';
+            position: absolute;
+            border: 1px solid rgba(70,125,120,0.17);
+            border-radius: 50%;
+        }
+        .vibe-phone-stage::before {
+            width: 300px;
+            height: 300px;
+            right: -76px;
+            top: -90px;
+            box-shadow: 0 0 0 42px rgba(255,255,255,0.08), 0 0 0 86px rgba(255,255,255,0.06);
+        }
+        .vibe-phone-stage::after {
+            width: 140px;
+            height: 140px;
+            left: 6%;
+            bottom: 5%;
+            background: rgba(255,255,255,0.12);
+        }
+        .phone-mockup {
+            position: absolute;
+            z-index: 2;
+            width: min(232px, 40%);
+            overflow: hidden;
+            border: 7px solid #37403F;
+            border-radius: 34px;
+            background: #FFFFFF;
+            box-shadow: 0 26px 54px rgba(43,57,56,0.24);
+            transition: transform 320ms ease, box-shadow 320ms ease;
+        }
+        .phone-mockup img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .phone-mockup-primary {
+            left: 14%;
+            top: 38px;
+            transform: rotate(-3deg);
+        }
+        .phone-mockup-secondary {
+            right: 12%;
+            top: 84px;
+            transform: rotate(4deg);
+        }
+        .vibe-card:hover .phone-mockup-primary {
+            transform: translateY(-5px) rotate(-2deg);
+            box-shadow: 0 32px 62px rgba(43,57,56,0.28);
+        }
+        .vibe-card:hover .phone-mockup-secondary {
+            transform: translateY(-3px) rotate(3deg);
+        }
+        .vibe-browser-stage {
+            display: flex;
+            align-items: center;
+            min-height: 560px;
+            padding: clamp(28px, 4vw, 48px);
+            background:
+                radial-gradient(circle at 82% 15%, rgba(255,255,255,0.78), transparent 28%),
+                linear-gradient(145deg, #F2E2D4 0%, #EEE5DC 48%, #E2E4EC 100%);
+        }
+        .browser-mockup {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            overflow: hidden;
+            border: 1px solid rgba(83,77,89,0.18);
+            border-radius: 18px;
+            background: #FFFDF9;
+            box-shadow: 0 26px 58px rgba(87,72,67,0.2);
+            transition: transform 320ms ease, box-shadow 320ms ease;
+        }
+        .vibe-card:hover .browser-mockup {
+            transform: translateY(-5px);
+            box-shadow: 0 32px 68px rgba(87,72,67,0.24);
+        }
+        .browser-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 42px;
+            padding: 8px 13px;
+            border-bottom: 1px solid rgba(83,77,89,0.1);
+            background: rgba(255,255,255,0.84);
+        }
+        .browser-dots {
+            display: flex;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+        .browser-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .browser-dots span:nth-child(1) { background: #DFA18C; }
+        .browser-dots span:nth-child(2) { background: #E5C17F; }
+        .browser-dots span:nth-child(3) { background: #83B69C; }
+        .browser-address {
+            min-width: 0;
+            flex: 1;
+            overflow: hidden;
+            padding: 5px 10px;
+            border-radius: 7px;
+            background: rgba(244,241,238,0.88);
+            color: rgba(74,85,104,0.52);
+            font-family: system-ui, sans-serif;
+            font-size: 10px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .browser-mockup img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .vibe-card-monet .vibe-project-title {
+            color: #82573D;
+        }
+        .vibe-card-monet .vibe-index {
+            color: #A3643F;
+        }
+        .vibe-card-monet .vibe-tags span {
+            background: rgba(238,161,106,0.13);
+            color: #87573B;
+        }
+        .vibe-dialog {
+            width: min(420px, calc(100vw - 36px));
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid rgba(54,95,91,0.15);
+            border-radius: 26px;
+            background: #FFFDF8;
+            color: #303A3A;
+            box-shadow: 0 30px 90px rgba(35,43,44,0.25);
+        }
+        .vibe-dialog::backdrop {
+            background: rgba(42,49,51,0.56);
+            backdrop-filter: blur(5px);
+        }
+        .vibe-dialog-inner {
+            position: relative;
+            padding: 34px;
+            text-align: center;
+        }
+        .vibe-dialog-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            display: inline-flex;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(155,142,196,0.12);
+            color: #5D566F;
+            cursor: pointer;
+        }
+        .vibe-dialog h3 {
+            margin: 8px 0 8px;
+            color: #2F5754;
+            font-size: 1.45rem;
+            font-weight: 600;
+        }
+        .vibe-dialog p {
+            color: rgba(74,85,104,0.66);
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .vibe-qr {
+            width: min(240px, 78vw);
+            height: auto;
+            margin: 22px auto 0;
+            border-radius: 18px;
+        }
+        @media (max-width: 940px) {
+            .vibe-header {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+            .vibe-card,
+            .vibe-card-monet {
+                grid-template-columns: 1fr;
+            }
+            .vibe-card-monet .vibe-visual {
+                order: 2;
+            }
+            .vibe-phone-stage,
+            .vibe-browser-stage {
+                min-height: 540px;
+            }
+        }
+        @media (max-width: 560px) {
+            .vibe-section {
+                padding: 60px 18px;
+            }
+            .vibe-card {
+                min-height: 0;
+                border-radius: 24px;
+            }
+            .vibe-content {
+                padding: 32px 24px 36px;
+            }
+            .vibe-meta {
+                align-items: flex-start;
+            }
+            .vibe-phone-stage {
+                min-height: 430px;
+            }
+            .phone-mockup {
+                width: min(178px, 46%);
+                border-width: 5px;
+                border-radius: 27px;
+            }
+            .phone-mockup-primary {
+                left: 8%;
+                top: 28px;
+            }
+            .phone-mockup-secondary {
+                right: 7%;
+                top: 62px;
+            }
+            .vibe-browser-stage {
+                min-height: 0;
+                padding: 22px 14px 26px;
+            }
+            .browser-toolbar {
+                min-height: 36px;
+                gap: 8px;
+                padding: 7px 9px;
+            }
+            .browser-address {
+                font-size: 8px;
+            }
+            .vibe-dialog-inner {
+                padding: 30px 22px 26px;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .phone-mockup,
+            .browser-mockup,
+            .vibe-action {
+                transition: none !important;
+            }
+            .vibe-card:hover .phone-mockup-primary,
+            .vibe-card:hover .phone-mockup-secondary,
+            .vibe-card:hover .browser-mockup,
+            .vibe-action:hover {
+                transform: none;
+            }
         }
 
-        /* ── 手机适配 ── */
-        @media (max-width: 768px) {
-            .gallery-section { padding: 60px 0 40px; }
-            .gallery-track { gap: 40px; padding: 0 calc(50vw - 120px); }
-            .gallery-img-wrap { padding: 10px 10px 28px 10px; }
-            .gallery-img-wrap::after { height: 24px; }
-            .gallery-label .label-title { font-size: 12px; }
-            .gallery-label .label-year { font-size: 10px; }
-            .gallery-label { padding: 4px 10px; }
-            .gallery-modal {
-                flex-direction: column;
-                max-height: 92vh;
-                width: 94vw;
+        /* ── 联系方式 · 林间暖光 ── */
+        .contact-section {
+            position: relative;
+            z-index: 10;
+            padding: clamp(76px, 9vw, 112px) 24px;
+            overflow: hidden;
+            background: #FCF9F3;
+        }
+        .contact-shell {
+            position: relative;
+            z-index: 1;
+            width: min(1100px, 100%);
+            margin: 0 auto;
+        }
+        .contact-panel {
+            display: grid;
+            grid-template-columns: minmax(0, 0.88fr) minmax(360px, 1.12fr);
+            gap: clamp(40px, 7vw, 92px);
+            align-items: center;
+            padding: clamp(34px, 5.5vw, 68px);
+            border: 1px solid rgba(69, 103, 91, 0.14);
+            border-radius: 32px;
+            background: rgba(255, 253, 248, 0.48);
+            box-shadow: 0 24px 68px rgba(87, 96, 88, 0.10);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+        .contact-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            color: #5B6F69;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+        .contact-eyebrow::before {
+            content: '';
+            width: 30px;
+            height: 2px;
+            border-radius: 999px;
+            background: #D59A61;
+        }
+        .contact-title {
+            margin: 0;
+            color: #304D45;
+            font-size: clamp(2.35rem, 5vw, 4.2rem);
+            font-weight: 600;
+            line-height: 1.08;
+            letter-spacing: -0.045em;
+        }
+        .contact-intro {
+            max-width: 430px;
+            margin-top: 22px;
+            color: #5B6F69;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+        .contact-links {
+            display: grid;
+            gap: 14px;
+        }
+        .contact-link {
+            display: grid;
+            grid-template-columns: 48px minmax(0, 1fr) 32px;
+            gap: 16px;
+            align-items: center;
+            min-height: 96px;
+            padding: 20px 22px;
+            border: 1px solid rgba(69, 103, 91, 0.11);
+            border-radius: 20px;
+            background: rgba(255, 253, 248, 0.86);
+            color: #355A50;
+            box-shadow: 0 14px 34px rgba(73, 88, 81, 0.09);
+            transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+        }
+        .contact-link:hover {
+            transform: translateY(-2px);
+            background: #FFFDF8;
+            box-shadow: 0 18px 42px rgba(73, 88, 81, 0.14);
+        }
+        .contact-link:focus-visible {
+            outline: 3px solid #F1D3A8;
+            outline-offset: 4px;
+        }
+        .contact-icon {
+            display: inline-flex;
+            width: 48px;
+            height: 48px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            background: rgba(79, 113, 98, 0.12);
+            color: #477063;
+            font-size: 17px;
+        }
+        .contact-link:nth-child(2) .contact-icon {
+            background: rgba(232, 201, 160, 0.28);
+            color: #966F3D;
+        }
+        .contact-label {
+            display: block;
+            margin-bottom: 5px;
+            color: #61776E;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+        }
+        .contact-value {
+            display: block;
+            overflow-wrap: anywhere;
+            color: #304D45;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+            font-weight: 600;
+            line-height: 1.45;
+        }
+        .contact-arrow {
+            display: inline-flex;
+            width: 32px;
+            height: 32px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(53, 90, 80, 0.08);
+            color: rgba(53, 90, 80, 0.62);
+            transition: transform 220ms ease;
+        }
+        .contact-link:hover .contact-arrow {
+            transform: translateX(2px);
+        }
+        .site-footer {
+            position: relative;
+            z-index: 10;
+            padding: 42px 24px 30px;
+            border-top: 1px solid rgba(251, 247, 240, 0.10);
+            background: #52675F;
+            color: #FBF7F0;
+        }
+        .site-footer-inner {
+            width: min(1100px, 100%);
+            margin: 0 auto;
+            text-align: center;
+        }
+        .footer-name {
+            display: inline-block;
+            color: #FFFDF8;
+            font-size: 1.18rem;
+            font-weight: 600;
+        }
+        .footer-motto {
+            margin-top: 10px;
+            color: #EDF0E8;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.06em;
+        }
+        .footer-copy {
+            margin-top: 30px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(251, 247, 240, 0.13);
+            color: #E1E7DF;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 11px;
+        }
+        @media (max-width: 760px) {
+            .contact-section {
+                padding: 60px 18px;
             }
-            .gallery-modal-left {
-                flex: 0 0 auto;
-                padding: 24px 24px 12px;
+            .contact-panel {
+                grid-template-columns: 1fr;
+                gap: 34px;
+                padding: 34px 24px;
+                border-radius: 24px;
             }
-            .gallery-modal-left img {
-                max-height: 40vh;
+            .contact-intro {
+                margin-top: 16px;
             }
-            .gallery-modal-right {
-                flex: 0 0 auto;
-                padding: 20px 24px 32px;
+            .contact-link {
+                grid-template-columns: 44px minmax(0, 1fr) 28px;
+                min-height: 88px;
+                gap: 13px;
+                padding: 18px 16px;
             }
-            .gallery-modal-right .letter-title { font-size: 20px; }
-            .gallery-modal-right .letter-body { font-size: 14px; }
+            .contact-icon {
+                width: 44px;
+                height: 44px;
+                border-radius: 13px;
+            }
+            .site-footer {
+                padding: 42px 18px 30px;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .contact-link,
+            .contact-arrow {
+                transition: none !important;
+            }
+            .contact-link:hover,
+            .contact-link:hover .contact-arrow {
+                transform: none;
+            }
         }
     </style>
 </head>
@@ -737,9 +1616,9 @@
             </a>
 
             <nav class="hidden md:flex space-x-8 text-base tracking-wide">
-                <a href="#about" class="font-medium text-black hover:text-[#EEA16A] transition-soft">个人经历</a>
-                <a href="#skills" class="font-medium text-black hover:text-[#EEA16A] transition-soft">兴趣爱好</a>
-                <a href="#projects" class="font-medium text-black hover:text-[#EEA16A] transition-soft">未来规划</a>
+                <a href="#education" class="font-medium text-black hover:text-[#EEA16A] transition-soft">教育经历</a>
+                <a href="#research-projects" class="font-medium text-black hover:text-[#EEA16A] transition-soft">项目经历</a>
+                <a href="#projects" class="font-medium text-black hover:text-[#EEA16A] transition-soft">Vibe Coding</a>
                 <a href="#contact" class="font-medium text-black hover:text-[#EEA16A] transition-soft">联系方式</a>
             </nav>
 
@@ -750,9 +1629,9 @@
 
         <div id="mobile-menu" class="mobile-menu-surface hidden md:hidden backdrop-blur-xl">
             <div class="mx-auto px-4 py-3 flex flex-col space-y-2" style="max-width:1100px;">
-                <a href="#about" class="py-2 text-base font-medium text-black hover:text-[#EEA16A] transition-soft">个人经历</a>
-                <a href="#skills" class="py-2 text-base font-medium text-black hover:text-[#EEA16A] transition-soft">兴趣爱好</a>
-                <a href="#projects" class="py-2 text-base font-medium text-black hover:text-[#EEA16A] transition-soft">未来规划</a>
+                <a href="#education" class="py-2 text-base font-medium text-black hover:text-[#EEA16A] transition-soft">教育经历</a>
+                <a href="#research-projects" class="py-2 text-base font-medium text-black hover:text-[#EEA16A] transition-soft">项目经历</a>
+                <a href="#projects" class="py-2 text-base font-medium text-black hover:text-[#EEA16A] transition-soft">Vibe Coding 作品</a>
                 <a href="#contact" class="py-2 text-base font-medium text-black hover:text-[#EEA16A] transition-soft">联系方式</a>
             </div>
         </div>
@@ -762,24 +1641,24 @@
     <section class="career-hero" id="home">
         <div class="hero-inner">
             <div class="hero-copy animate-fadeIn">
-                <p class="hero-kicker">在读研究生 · 求职中</p>
+                <p class="hero-kicker">2027届硕士 · 求职中</p>
                 <h1 class="hero-title">
                     <span class="hero-greeting">你好，我是</span>
                     <strong>冯思雅</strong><span class="hero-period">。</span>
                 </h1>
                 <p class="hero-summary">
-                    认真、专注，也始终对新事物保持好奇。面对陌生问题，我愿意主动学习、耐心拆解，并把每一件小事稳稳落到实处。
+                    现就读于中国科学院高能物理研究所，是粒子物理与原子核物理专业硕士研究生。专注高能物理数据分析，擅长大规模数据处理与机器学习应用，熟悉从模拟、重建、事例筛选到统计分析的完整流程，也善于通过 Vibe Coding 与自动化工作流提升科研效率。
                 </p>
                 <div class="hero-traits" aria-label="个人特点">
-                    <span>认真负责</span>
-                    <span>学习主动</span>
-                    <span>耐心细致</span>
+                    <span>高能物理数据分析</span>
+                    <span>机器学习 · ParT</span>
+                    <span>C++ · Python</span>
                 </div>
                 <div class="hero-actions">
-                    <a href="#about" class="hero-primary">
-                        了解我的经历 <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    <a href="files/resume/冯思雅-个人简历.pdf" class="hero-primary" download>
+                        下载我的简历 <i class="fa fa-download" aria-hidden="true"></i>
                     </a>
-                    <a href="#contact" class="hero-secondary">联系我</a>
+                    <a href="#education" class="hero-secondary">了解我的经历</a>
                 </div>
             </div>
 
@@ -787,266 +1666,293 @@
                 <img src="images/风格参考/1/06_研究生_漫画校准稿_v5_英雄区融合.png" alt="冯思雅的写意人物插画">
             </div>
         </div>
-        <a href="#about" class="hero-scroll" aria-label="向下查看个人经历">
+        <a href="#education" class="hero-scroll" aria-label="向下查看教育经历">
             <span>SCROLL</span>
             <i class="fa fa-angle-down" aria-hidden="true"></i>
         </a>
     </section>
 
-    <!-- ══════════════ 个人经历 · 人生画廊 ══════════════ -->
-    <section id="about" class="gallery-section">
-        <!-- 展厅射灯 -->
-        <div class="gallery-spotlight"></div>
+    <!-- ══════════════ 教育经历 · 编辑式时间轴 ══════════════ -->
+    <section id="education" class="education-section" aria-labelledby="education-title">
+        <div class="education-shell">
+            <header class="education-heading">
+                <p class="education-eyebrow">Education</p>
+                <h2 class="education-title" id="education-title">教育经历</h2>
+                <p class="education-intro">从基础物理训练出发，逐步走向高能物理实验数据处理与粒子物理研究。</p>
+            </header>
 
-        <div class="gallery-header">
-            <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-serif font-bold mb-4 text-slate">个人经历</h2>
-            <div class="divider-monet w-32 mx-auto"></div>
-            <p class="text-slate/45 mt-3 text-sm tracking-wider">人生画廊 · 点击任意画作，阅读背后的故事</p>
+            <ol class="education-list">
+                <li class="education-item">
+                    <p class="education-period">
+                        <span class="education-index" aria-hidden="true">01</span>
+                        2024.09 — 至今
+                    </p>
+                    <article>
+                        <div class="education-school-row">
+                            <h3 class="education-school">中国科学院大学 · 高能物理研究所</h3>
+                            <span class="education-status">在读</span>
+                        </div>
+                        <p class="education-degree">粒子物理与原子核物理 · 学术型硕士</p>
+                        <div class="education-meta" aria-label="硕士阶段信息">
+                            <span>GPA 3.8 / 4.0</span>
+                            <span>保研</span>
+                        </div>
+                        <p class="education-courses"><strong>主修课程：</strong>物理中的概率与统计、粒子物理实验数据处理与分析、探测器模拟与数据分析</p>
+                    </article>
+                </li>
+
+                <li class="education-item">
+                    <p class="education-period">
+                        <span class="education-index" aria-hidden="true">02</span>
+                        2020.09 — 2024.06
+                    </p>
+                    <article>
+                        <div class="education-school-row">
+                            <h3 class="education-school">华中师范大学</h3>
+                        </div>
+                        <p class="education-degree">物理学基地班 · 理学学士</p>
+                        <div class="education-meta" aria-label="本科阶段信息">
+                            <span>GPA 3.7 / 4.0</span>
+                            <span>专业前 20%</span>
+                            <span>2020年高考 · 湖北省前 2%</span>
+                        </div>
+                        <p class="education-courses"><strong>主修课程：</strong>高等数学、高级程序语言设计、原子物理、分析力学、量子力学、固体物理、统计物理、四级物理实验</p>
+                    </article>
+                </li>
+            </ol>
         </div>
+    </section>
 
-        <div class="gallery-viewport" id="gallery-viewport">
-            <div class="gallery-track" id="gallery-track">
-                <!-- 照片由 JS 动态渲染 -->
+    <!-- ══════════════ 项目经历 · 科研案例 ══════════════ -->
+    <section id="research-projects" class="research-section" aria-labelledby="research-title">
+        <div class="research-shell">
+            <header class="research-header">
+                <div>
+                    <p class="research-eyebrow">Selected Research</p>
+                    <h2 class="research-title" id="research-title">项目经历</h2>
+                </div>
+                <p class="research-intro">围绕高能物理事例选择与稀有过程测量，搭建从模拟、重建到机器学习分类和统计分析的完整研究流程。</p>
+            </header>
+
+            <div class="research-stack">
+                <article class="research-card">
+                    <div class="research-metric" aria-label="信号显著度提升百分之九十点九">
+                        <span class="research-number">Research 01</span>
+                        <div class="research-metric-main">
+                            <strong class="research-value">+90.9%</strong>
+                            <span class="research-metric-label">信号显著度提升，显著优于传统硬截断方法</span>
+                        </div>
+                    </div>
+
+                    <div class="research-content">
+                        <div class="research-meta-row">
+                            <time class="research-date" datetime="2023-06">2023.06 — 2024.05</time>
+                            <span class="research-status">已完成</span>
+                        </div>
+                        <h3 class="research-project-title long-title">多变量分析在四顶夸克事例选择优化中的应用研究</h3>
+                        <p class="research-summary">针对四顶夸克全强子衰变末态，利用机器学习方法进行事例选择优化研究。采用多变量分析工具包（TMVA）的机器学习框架，通过增强决策树（BDT）中的自适应增强与梯度增强算法，并对模型的过训练情况进行检验。</p>
+                        <p class="research-method-label">技术工具</p>
+                        <div class="research-tools" aria-label="项目方法与工具">
+                            <span>TMVA</span>
+                            <span>BDT</span>
+                            <span>AdaBoost</span>
+                            <span>Gradient Boosting</span>
+                        </div>
+                        <p class="research-outcome">通过自适应增强与梯度增强算法，将信号显著度提升 <strong>90.9%</strong>。</p>
+                    </div>
+                </article>
+
+                <article class="research-card reverse">
+                    <div class="research-metric" aria-label="信噪比从十的负八次方量级提升至十的负四次方量级">
+                        <span class="research-number">Research 02</span>
+                        <div class="research-metric-main">
+                            <strong class="research-value compact">10<sup>−8</sup> → 10<sup>−4</sup></strong>
+                            <span class="research-metric-label">信噪比跨越四个数量级</span>
+                        </div>
+                    </div>
+
+                    <div class="research-content">
+                        <div class="research-meta-row">
+                            <time class="research-date" datetime="2025-09">2025.09 — 至今</time>
+                            <span class="research-status">进行中</span>
+                        </div>
+                        <h3 class="research-project-title">CEPC 上测量电子汤川耦合的可行性研究</h3>
+                        <p class="research-summary">针对希格斯粒子 s 道双胶子末态，构建完整的高能物理模拟与分析流程。使用 WHIZARD 3 产生信号与本底样本，经 PYTHIA 6 强子化与 Delphes 探测器模拟后，完成物理对象重建与事例预筛选；在此基础上，使用 Particle Transformer 深度学习方法与同时拟合开展分析。</p>
+                        <p class="research-method-label">技术工具</p>
+                        <div class="research-tools" aria-label="项目技术工具">
+                            <span>WHIZARD 3</span>
+                            <span>PYTHIA 6</span>
+                            <span>Delphes</span>
+                            <span>Particle Transformer</span>
+                            <span>Simultaneous Fit</span>
+                        </div>
+                        <p class="research-outcome">将信噪比由初始的 <strong>10<sup>−8</sup></strong> 量级提升至 <strong>10<sup>−4</sup></strong> 量级。</p>
+                    </div>
+                </article>
             </div>
+        </div>
+    </section>
 
-            <!-- 左箭头 -->
-            <button class="gallery-arrow gallery-arrow-left" id="gallery-arrow-left" aria-label="向左滚动">
-                <i class="fa fa-chevron-left"></i>
+    <!-- ══════════════ Vibe Coding · 产品案例 ══════════════ -->
+    <section id="projects" class="vibe-section" aria-labelledby="vibe-title">
+        <div class="vibe-shell">
+            <header class="vibe-header">
+                <div>
+                    <p class="vibe-eyebrow">Selected Works</p>
+                    <h2 class="vibe-title" id="vibe-title">Vibe Coding 作品</h2>
+                </div>
+                <div>
+                    <p class="vibe-intro">将日常需求与创意想法转化为真正可使用的数字产品，在实践中完成从功能构思、界面设计到上线交付的完整过程。</p>
+                    <p class="vibe-site-note">本站亦由 Vibe Coding 完成</p>
+                </div>
+            </header>
+
+            <div class="vibe-stack">
+                <article class="vibe-card">
+                    <div class="vibe-content">
+                        <div class="vibe-meta">
+                            <span class="vibe-index">Product 01</span>
+                            <span class="vibe-platform">微信小程序 · 已上线</span>
+                        </div>
+                        <h3 class="vibe-project-title">思思的三角函数计算器</h3>
+                        <p class="vibe-description">面向学习与日常计算场景开发的三角函数工具，支持角度与弧度计算、反三角函数求解、函数图像可视化及历史记录，让常用计算集中在一个简洁的小程序中完成。</p>
+                        <div class="vibe-stat" aria-label="小程序上线一个月累计用户超过三百人">
+                            <strong>300+</strong>
+                            <span>上线一个月累计用户</span>
+                        </div>
+                        <div class="vibe-tags" aria-label="小程序主要功能">
+                            <span>三角函数计算</span>
+                            <span>角度反求</span>
+                            <span>函数可视化</span>
+                        </div>
+                        <div class="vibe-actions">
+                            <button class="vibe-action" type="button" id="qr-trigger" aria-haspopup="dialog" aria-controls="mini-qr-dialog">
+                                <i class="fa fa-weixin" aria-hidden="true"></i>
+                                查看小程序码
+                            </button>
+                        </div>
+                    </div>
+
+                    <figure class="vibe-visual vibe-phone-stage" aria-label="思思的三角函数计算器小程序界面展示">
+                        <div class="phone-mockup phone-mockup-primary">
+                            <img
+                                src="images/vibecoding/web/mini-calculator-480.webp"
+                                srcset="images/vibecoding/web/mini-calculator-480.webp 480w, images/vibecoding/web/mini-calculator-800.webp 800w"
+                                sizes="(max-width: 560px) 42vw, (max-width: 940px) 220px, 232px"
+                                width="800"
+                                height="1735"
+                                loading="lazy"
+                                decoding="async"
+                                alt="三角函数计算页面，展示角度输入及正弦、余弦等计算结果">
+                        </div>
+                        <div class="phone-mockup phone-mockup-secondary">
+                            <img
+                                src="images/vibecoding/web/mini-graph-480.webp"
+                                srcset="images/vibecoding/web/mini-graph-480.webp 480w, images/vibecoding/web/mini-graph-800.webp 800w"
+                                sizes="(max-width: 560px) 42vw, (max-width: 940px) 220px, 232px"
+                                width="800"
+                                height="1735"
+                                loading="lazy"
+                                decoding="async"
+                                alt="函数图像页面，展示正弦函数曲线及坐标轴">
+                        </div>
+                    </figure>
+                </article>
+
+                <article class="vibe-card vibe-card-monet">
+                    <figure class="vibe-visual vibe-browser-stage" aria-label="莫奈风格图像转换器网页界面展示">
+                        <div class="browser-mockup">
+                            <div class="browser-toolbar" aria-hidden="true">
+                                <span class="browser-dots"><span></span><span></span><span></span></span>
+                                <span class="browser-address">10crystal.github.io/monet-portrait-generator/</span>
+                            </div>
+                            <img
+                                src="images/vibecoding/web/monet-showcase-900.webp"
+                                srcset="images/vibecoding/web/monet-showcase-900.webp 900w, images/vibecoding/web/monet-showcase-1440.webp 1440w"
+                                sizes="(max-width: 560px) calc(100vw - 64px), (max-width: 940px) calc(100vw - 130px), 560px"
+                                width="1440"
+                                height="1198"
+                                loading="lazy"
+                                decoding="async"
+                                alt="莫奈风格图像转换器，左侧为原始人像，右侧为印象派转换结果，下方提供笔触等参数调节">
+                        </div>
+                    </figure>
+
+                    <div class="vibe-content">
+                        <div class="vibe-meta">
+                            <span class="vibe-index">Product 02</span>
+                            <span class="vibe-platform">Web App · 在线体验</span>
+                        </div>
+                        <h3 class="vibe-project-title">莫奈风格图像转换器</h3>
+                        <p class="vibe-description">在浏览器中将普通照片转化为莫奈印象派风格图像，并通过笔触数量、尺寸、随机程度与柔和度等参数实时调整画面效果，支持重新渲染与结果下载。</p>
+                        <div class="vibe-tags" aria-label="图像转换器主要功能">
+                            <span>图像风格转换</span>
+                            <span>参数化调节</span>
+                            <span>Browser Rendering</span>
+                        </div>
+                        <div class="vibe-actions">
+                            <a class="vibe-action vibe-action-light" href="https://10crystal.github.io/monet-portrait-generator/" target="_blank" rel="noopener noreferrer">
+                                在线体验
+                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <dialog class="vibe-dialog" id="mini-qr-dialog" aria-labelledby="mini-qr-title">
+        <div class="vibe-dialog-inner">
+            <button class="vibe-dialog-close" type="button" id="qr-close" aria-label="关闭小程序码">
+                <i class="fa fa-times" aria-hidden="true"></i>
             </button>
-            <!-- 右箭头 -->
-            <button class="gallery-arrow gallery-arrow-right" id="gallery-arrow-right" aria-label="向右滚动">
-                <i class="fa fa-chevron-right"></i>
-            </button>
+            <h3 id="mini-qr-title">思思的三角函数计算器</h3>
+            <p>使用微信扫描或长按识别小程序码，即可体验完整功能。</p>
+            <img class="vibe-qr" src="images/vibecoding/小程序/小程序码.PNG" width="636" height="626" loading="lazy" decoding="async" alt="思思的三角函数计算器微信小程序码">
         </div>
+    </dialog>
 
-        <!-- 画廊地面线 -->
-        <div class="gallery-floor"></div>
-    </section>
-    </section>
-
-    <!-- ══════════════ 兴趣爱好 · 紫藤花架 ══════════════ -->
-    <section id="skills" class="py-24 bg-monet-wisteria relative z-10">
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-serif font-bold text-shadow mb-4">兴趣爱好</h2>
-                <div class="divider-monet w-32 mx-auto"></div>
-                <p class="text-slate/55 mt-4 max-w-xl mx-auto text-sm">唯一喜欢的东西是猫，唯一向往的工作是不劳而获</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- 电子竞技 -->
-                <div class="glass rounded-2xl p-8 transition-soft hover:shadow-lg">
-                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(155,142,196,0.18)">
-                        <i class="fa fa-gamepad text-xl text-lavender"></i>
-                    </div>
-                    <h3 class="text-lg font-serif font-bold mb-2 text-shadow">电子竞技</h3>
-                    <p class="text-slate/60 text-sm mb-4 leading-relaxed">
-                        热爱各种竞技类型手游，其实是闲的无聊且啥都想试试。有一丢丢游戏天赋且专注度很高，所以玩什么都可以小小成。
-                    </p>
-                    <div class="flex flex-wrap gap-1.5">
-                        <span class="tag-lavender text-xs px-2.5 py-1 rounded-full">王者荣耀省级蔡文姬、朵利亚</span>
-                        <span class="tag-sage text-xs px-2.5 py-1 rounded-full">金铲铲 S14 赛季王者</span>
-                        <span class="tag-sky text-xs px-2.5 py-1 rounded-full">月圆之夜北京市前十</span>
-                    </div>
+    <!-- ══════════════ 联系方式 · 林间暖光 ══════════════ -->
+    <section id="contact" class="contact-section" aria-labelledby="contact-title">
+        <div class="contact-shell">
+            <div class="contact-panel">
+                <div>
+                    <p class="contact-eyebrow">Contact</p>
+                    <h2 id="contact-title" class="contact-title">联系方式</h2>
+                    <p class="contact-intro">如果你对我的研究经历、项目实践或求职方向感兴趣，欢迎通过邮件或电话与我联系。</p>
                 </div>
 
-                <!-- 恢复性睡眠 -->
-                <div class="glass rounded-2xl p-8 transition-soft hover:shadow-lg">
-                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(139,168,154,0.18)">
-                        <i class="fa fa-moon-o text-xl text-sage"></i>
-                    </div>
-                    <h3 class="text-lg font-serif font-bold mb-2 text-shadow">恢复性睡眠</h3>
-                    <p class="text-slate/60 text-sm mb-4 leading-relaxed">
-                        最喜欢睡觉，最长记录达十四小时。睡眠是短暂的死亡，而活着是一场长久的失眠。
-                    </p>
-                    <div class="flex flex-wrap gap-1.5">
-                        <span class="tag-sage text-xs px-2.5 py-1 rounded-full">喜欢做有帅哥的梦</span>
-                        <span class="tag-rose text-xs px-2.5 py-1 rounded-full">有美女也不是不行</span>
-                        <span class="tag-lavender text-xs px-2.5 py-1 rounded-full">经常梦到大逃杀 T.T</span>
-                    </div>
-                </div>
-
-                <!-- 海鲜 -->
-                <div class="glass rounded-2xl p-8 transition-soft hover:shadow-lg">
-                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(212,165,165,0.18)">
-                        <i class="fa fa-cutlery text-xl text-rose"></i>
-                    </div>
-                    <h3 class="text-lg font-serif font-bold mb-2 text-shadow">ci 各种海鲜</h3>
-                    <p class="text-slate/60 text-sm mb-4 leading-relaxed">
-                        海鲜嚎 ci，我 cicicicicici……最喜欢蒜蓉生蚝，但是好贵啊呜呜。只吃熟海鲜，不吃生海鲜，yueyueyue……
-                    </p>
-                    <div class="flex flex-wrap gap-1.5">
-                        <span class="tag-rose text-xs px-2.5 py-1 rounded-full">波士顿龙虾</span>
-                        <span class="tag-peach text-xs px-2.5 py-1 rounded-full">超级大生蚝🦪</span>
-                        <span class="tag-sage text-xs px-2.5 py-1 rounded-full">无敌大扇贝</span>
-                        <span class="tag-sky text-xs px-2.5 py-1 rounded-full">鱿鱼吃多了不想吃了</span>
-                    </div>
+                <div class="contact-links" aria-label="联系冯思雅">
+                    <a class="contact-link" href="mailto:syfeng@ihep.ac.cn" aria-label="发送邮件至 syfeng@ihep.ac.cn">
+                        <span class="contact-icon" aria-hidden="true"><i class="fa fa-envelope-o"></i></span>
+                        <span>
+                            <span class="contact-label">邮箱 EMAIL</span>
+                            <span class="contact-value">syfeng@ihep.ac.cn</span>
+                        </span>
+                        <span class="contact-arrow" aria-hidden="true"><i class="fa fa-arrow-right"></i></span>
+                    </a>
+                    <a class="contact-link" href="tel:+8615897995592" aria-label="拨打电话 +86 158 9799 5592">
+                        <span class="contact-icon" aria-hidden="true"><i class="fa fa-phone"></i></span>
+                        <span>
+                            <span class="contact-label">电话 PHONE</span>
+                            <span class="contact-value">+86 158 9799 5592</span>
+                        </span>
+                        <span class="contact-arrow" aria-hidden="true"><i class="fa fa-arrow-right"></i></span>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ══════════════ 未来规划 · 睡莲画廊 ══════════════ -->
-    <section id="projects" class="py-24 bg-cream relative z-10">
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-serif font-bold text-shadow mb-4">未来规划</h2>
-                <div class="divider-monet w-32 mx-auto"></div>
-                <p class="text-slate/55 mt-4 max-w-xl mx-auto text-sm">最大的愿望是成为快乐健康、有钱有闲的人</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- 文字皆有温度 -->
-                <div class="glass rounded-2xl overflow-hidden transition-soft hover:shadow-lg group">
-                    <div class="relative overflow-hidden">
-                        <img src="images/hello.jpg" alt="文字皆有温度" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-lavender/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <span class="text-white font-medium text-sm tracking-wider">查看详情</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-lg font-serif font-bold mb-2 text-shadow">文字皆有温度</h3>
-                        <p class="text-slate/60 text-sm mb-4">从小就爱看韩剧，经常被各种文字感动得稀里哗啦，梦想成为一个有温度的笔者。</p>
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="tag-lavender text-xs px-2 py-1 rounded-full">文风朴实</span>
-                            <span class="tag-rose text-xs px-2 py-1 rounded-full">偶尔脆弱</span>
-                            <span class="tag-sage text-xs px-2 py-1 rounded-full">用文字拥抱自己</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 找到一份工作 -->
-                <div class="glass rounded-2xl overflow-hidden transition-soft hover:shadow-lg group">
-                    <div class="relative overflow-hidden">
-                        <img src="images/钱来.jpg" alt="工作" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-sage/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <span class="text-white font-medium text-sm tracking-wider">查看详情</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-lg font-serif font-bold mb-2 text-shadow">找到一份中不溜的工作</h3>
-                        <p class="text-slate/60 text-sm mb-4">赚点小钱，摸会小鱼，一半忙碌，一半喘息。</p>
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="tag-peach text-xs px-2 py-1 rounded-full">maybe 老师</span>
-                            <span class="tag-sky text-xs px-2 py-1 rounded-full">补药是程序员啊</span>
-                            <span class="tag-lavender text-xs px-2 py-1 rounded-full">但年薪一百也不是不行</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 养一只小猫 -->
-                <div class="glass rounded-2xl overflow-hidden transition-soft hover:shadow-lg group">
-                    <div class="relative overflow-hidden">
-                        <img src="images/小猫.jpg" alt="小猫" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-rose/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <span class="text-white font-medium text-sm tracking-wider">查看详情</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-lg font-serif font-bold mb-2 text-shadow">养一只小茂密</h3>
-                        <p class="text-slate/60 text-sm mb-4">这个世界不能没有小猫，我不能没有小猫！</p>
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="tag-peach text-xs px-2 py-1 rounded-full">咖啡猫 ☕️</span>
-                            <span class="tag-sage text-xs px-2 py-1 rounded-full">逻辑 🐱</span>
-                            <span class="tag-sky text-xs px-2 py-1 rounded-full">奶牛猫</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <a href="#" class="btn-monet text-sm">探索更多</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ 联系方式 · 晨雾 ══════════════ -->
-    <section id="contact" class="py-24 bg-monet-pond relative z-10">
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-serif font-bold text-shadow mb-4">联系方式</h2>
-                <div class="divider-monet w-32 mx-auto"></div>
-                <p class="text-slate/55 mt-4 text-sm">很高兴认识你</p>
-            </div>
-
-            <div class="flex justify-center">
-                <div class="w-full max-w-xl">
-                    <div class="glass rounded-2xl p-8 md:p-10">
-                        <h3 class="text-xl font-serif font-bold mb-8 text-shadow">找到我</h3>
-                        <div class="space-y-6">
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(155,142,196,0.18)">
-                                    <i class="fa fa-map-marker text-lavender"></i>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-slate/40 font-medium tracking-wide mb-0.5">地址</p>
-                                    <p class="text-slate/75 text-sm">可能在地球上的任何一个角落</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(139,168,154,0.18)">
-                                    <i class="fa fa-envelope text-sage"></i>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-slate/40 font-medium tracking-wide mb-0.5">邮箱</p>
-                                    <p class="text-slate/75 text-sm">2241167983@qq.com</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(123,165,200,0.18)">
-                                    <i class="fa fa-phone text-sky"></i>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-slate/40 font-medium tracking-wide mb-0.5">电话</p>
-                                    <p class="text-slate/75 text-sm">158-9799-5592</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(212,165,165,0.18)">
-                                    <i class="fa fa-weixin text-rose"></i>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-slate/40 font-medium tracking-wide mb-0.5">微信</p>
-                                    <p class="text-slate/75 text-sm">Crystal10yi</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════ 页脚 · 暮色 ══════════════ -->
-    <footer class="py-14 relative z-10" style="background:linear-gradient(180deg, #3D4554 0%, #2D3544 100%)">
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center">
-                <a href="#" class="text-xl font-serif font-bold text-cream/80 mb-3 inline-block">冯思雅的人生画廊</a>
-                <p class="text-cream/35 text-sm">欢迎来到一个超有意思小女孩的世界</p>
-            </div>
-            <div class="border-t border-cream/10 mt-8 pt-8 text-center">
-                <p class="text-cream/25 text-xs">&copy; 2026 Crystal. 保留所有权利. &nbsp;·&nbsp; Designed with Monet in mind</p>
-            </div>
+    <!-- ══════════════ 页脚 ══════════════ -->
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <a href="#" class="footer-name">冯思雅的个人网站</a>
+            <p class="footer-motto">预测未来最好的办法是创造它。</p>
+            <p class="footer-copy">&copy; 2026 冯思雅. 保留所有权利.</p>
         </div>
     </footer>
-
-    <!-- ══════════════ 画作弹窗 · 读信 ══════════════ -->
-    <div class="gallery-modal-overlay" id="gallery-modal-overlay">
-        <div class="gallery-modal" id="gallery-modal">
-            <div class="gallery-modal-left">
-                <img src="" alt="" id="modal-img">
-            </div>
-            <div class="gallery-modal-right">
-                <p class="letter-period" id="modal-period"></p>
-                <h3 class="letter-title" id="modal-title"></h3>
-                <p class="letter-year" id="modal-year"></p>
-                <div class="letter-body" id="modal-body"></div>
-            </div>
-        </div>
-        <button class="gallery-modal-close" id="gallery-modal-close" aria-label="关闭">
-            <i class="fa fa-times"></i>
-        </button>
-    </div>
 
     <!-- 返回顶部 -->
     <button id="back-to-top" class="fixed bottom-8 right-8 btn-monet w-11 h-11 !p-0 flex items-center justify-center opacity-0 invisible transition-all duration-300 z-50">
@@ -1080,305 +1986,22 @@
         const mobileLinks = mobileMenu.querySelectorAll('a');
         mobileLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
 
-        // ── 人生画廊 ──
-        const galleryData = [
-            {
-                id: 'childhood',
-                period: '两岁',
-                title: '两岁',
-                year: '2004',
-                img: 'images/个人经历/两岁照片.jpg',
-                sizes: { w: 280, h: 310 },
-                letter: '后续会补充更多故事……'
-            },
-            {
-                id: 'highschool',
-                period: '高二',
-                title: '高二',
-                year: '2018',
-                img: 'images/个人经历/高中.JPG',
-                sizes: { w: 185, h: 210 },
-                letter: '后续会补充更多故事……'
-            },
-            {
-                id: 'freshman',
-                period: '大一',
-                title: '大一',
-                year: '2021',
-                img: 'images/个人经历/大一.jpg',
-                sizes: { w: 260, h: 300 },
-                letter: '后续会补充更多故事……'
-            },
-            {
-                id: 'sophomore',
-                period: '大三',
-                title: '大三',
-                year: '2023',
-                img: 'images/个人经历/大二.jpg',
-                sizes: { w: 170, h: 195 },
-                letter: '后续会补充更多故事……'
-            },
-            {
-                id: 'graduation',
-                period: '大四毕业',
-                title: '大四毕业',
-                year: '2024',
-                img: 'images/个人经历/毕业.jpeg',
-                sizes: { w: 280, h: 310 },
-                letter: '后续会补充更多故事……'
-            },
-            {
-                id: 'grad',
-                period: '研二',
-                title: '研二',
-                year: '2026',
-                img: 'images/个人经历/研究生.jpeg',
-                sizes: { w: 215, h: 250 },
-                letter: '后续会补充更多故事……'
-            },
-        ];
+        // ── 小程序码弹窗 ──
+        const qrDialog = document.getElementById('mini-qr-dialog');
+        const qrTrigger = document.getElementById('qr-trigger');
+        const qrClose = document.getElementById('qr-close');
 
-        const track = document.getElementById('gallery-track');
-        const viewport = document.getElementById('gallery-viewport');
-        const modalOverlay = document.getElementById('gallery-modal-overlay');
-        const modalImg = document.getElementById('modal-img');
-        const modalPeriod = document.getElementById('modal-period');
-        const modalTitle = document.getElementById('modal-title');
-        const modalYear = document.getElementById('modal-year');
-        const modalBody = document.getElementById('modal-body');
-        const modalClose = document.getElementById('gallery-modal-close');
-
-        const arrowLeft = document.getElementById('gallery-arrow-left');
-        const arrowRight = document.getElementById('gallery-arrow-right');
-
-        // ── 渲染画作（两组用于无缝循环） ──
-        function renderFrame(data) {
-            const frame = document.createElement('div');
-            frame.className = 'gallery-frame';
-            frame.dataset.id = data.id;
-            frame.innerHTML = `
-                <div class="gallery-img-wrap">
-                    <img src="${data.img}" alt="${data.title}" width="${data.sizes.w}" height="${data.sizes.h}" draggable="false">
-                </div>
-                <div class="gallery-label">
-                    <div class="label-title">${data.period}</div>
-                    <div class="label-year">${data.year}</div>
-                </div>
-            `;
-            frame.addEventListener('click', (e) => {
-                if (wasDragging) return;
-                openModal(data);
-            });
-            return frame;
-        }
-
-        // 渲染两组用于无限循环
-        galleryData.forEach(d => track.appendChild(renderFrame(d)));
-        galleryData.forEach(d => track.appendChild(renderFrame(d)));
-
-        // ── 弹窗 ──
-        function openModal(data) {
-            pauseScroll = true;
-            modalImg.src = data.img;
-            modalImg.alt = data.title;
-            modalPeriod.textContent = data.period;
-            modalTitle.textContent = data.title;
-            modalYear.textContent = data.year;
-            modalBody.innerHTML = data.letter.replace(/\n/g, '<br>');
-            modalOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modalOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-            pauseScroll = false;
-            lastTime = null;
-            requestAnimationFrame(autoScroll);
-        }
-
-        modalClose.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) closeModal();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
+        qrTrigger.addEventListener('click', () => qrDialog.showModal());
+        qrClose.addEventListener('click', () => qrDialog.close());
+        qrDialog.addEventListener('click', event => {
+            if (event.target === qrDialog) qrDialog.close();
         });
 
-        // ── 自动滚动（无缝循环） ──
-        let offset = 0;             // px
-        const SPEED = 0.04;         // px/ms （稍快）
-        let lastTime = null;
-        let pauseScroll = false;
-        let wasDragging = false;
-        let setWidth = 0;           // 一组照片的总宽度（含gap）
-
-        let rafId = null;
-
-        function calcSetWidth() {
-            const frames = track.querySelectorAll('.gallery-frame');
-            if (frames.length === 0) return 0;
-            const frameWidths = [];
-            frames.forEach(f => frameWidths.push(f.getBoundingClientRect().width));
-            // gap 60px between frames
-            const gapPx = 60;
-            const halfCount = frames.length / 2;
-            let total = 0;
-            for (let i = 0; i < halfCount; i++) {
-                total += frameWidths[i] + gapPx;
-            }
-            total -= gapPx; // last one no gap
-            return total;
-        }
-
-        function autoScroll(timestamp) {
-            if (pauseScroll) return;
-            if (!lastTime) lastTime = timestamp;
-            const dt = Math.min(timestamp - lastTime, 50); // cap to avoid jumps when tab switches
-            lastTime = timestamp;
-
-            if (setWidth === 0) setWidth = calcSetWidth();
-            if (setWidth === 0) { rafId = requestAnimationFrame(autoScroll); return; }
-
-            offset += SPEED * dt;
-
-            // 无缝循环：当偏移超过一组宽度时回卷
-            if (offset >= setWidth) {
-                offset -= setWidth;
-            }
-
-            track.style.transform = `translateX(${-offset}px)`;
-            rafId = requestAnimationFrame(autoScroll);
-        }
-
-        // ── 鼠标拖拽 / 触摸滑动 ──
-        let dragging = false;
-        let dragStartX = 0;
-        let dragStartOffset = 0;
-        let dragMoved = false;
-
-        viewport.addEventListener('mousedown', (e) => {
-            dragging = true;
-            wasDragging = false;
-            dragMoved = false;
-            dragStartX = e.clientX;
-            dragStartOffset = offset;
-            pauseScroll = true;
-            lastTime = null;
-            viewport.classList.add('grabbing');
-        });
-
-        window.addEventListener('mousemove', (e) => {
-            if (!dragging) return;
-            const dx = dragStartX - e.clientX;
-            if (Math.abs(dx) > 4) dragMoved = true;
-            offset = dragStartOffset + dx;
-            if (setWidth === 0) setWidth = calcSetWidth();
-            // 无缝卷绕
-            while (offset < 0) offset += setWidth;
-            while (offset >= setWidth) offset -= setWidth;
-            track.style.transform = `translateX(${-offset}px)`;
-        });
-
-        window.addEventListener('mouseup', () => {
-            if (!dragging) return;
-            dragging = false;
-            viewport.classList.remove('grabbing');
-            if (dragMoved) {
-                // 标记此次拖动，防止后续触发 click
-                wasDragging = true;
-                setTimeout(() => { wasDragging = false; }, 200);
-            }
-            pauseScroll = false;
-            lastTime = null;
-            requestAnimationFrame(autoScroll);
-        });
-
-        // 触摸事件
-        viewport.addEventListener('touchstart', (e) => {
-            dragging = true;
-            wasDragging = false;
-            dragMoved = false;
-            dragStartX = e.touches[0].clientX;
-            dragStartOffset = offset;
-            pauseScroll = true;
-            lastTime = null;
-        }, { passive: true });
-
-        viewport.addEventListener('touchmove', (e) => {
-            if (!dragging) return;
-            const dx = dragStartX - e.touches[0].clientX;
-            if (Math.abs(dx) > 4) dragMoved = true;
-            offset = dragStartOffset + dx;
-            if (setWidth === 0) setWidth = calcSetWidth();
-            while (offset < 0) offset += setWidth;
-            while (offset >= setWidth) offset -= setWidth;
-            track.style.transform = `translateX(${-offset}px)`;
-        }, { passive: true });
-
-        viewport.addEventListener('touchend', () => {
-            if (!dragging) return;
-            dragging = false;
-            if (dragMoved) {
-                wasDragging = true;
-                setTimeout(() => { wasDragging = false; }, 200);
-            }
-            pauseScroll = false;
-            lastTime = null;
-            requestAnimationFrame(autoScroll);
-        });
-
-        // ── 箭头按钮：点击移动一整张画的宽度 ──
-        function getAvgFrameWidth() {
-            if (setWidth === 0) return 280;
-            const halfCount = galleryData.length;
-            return setWidth / halfCount;  // 一组总宽 / 张数 ≈ 单张的平均步长
-        }
-
-        arrowLeft.addEventListener('click', () => {
-            const step = getAvgFrameWidth();
-            offset -= step;
-            if (setWidth > 0) {
-                while (offset < 0) offset += setWidth;
-            }
-            track.style.transform = `translateX(${-offset}px)`;
-        });
-
-        arrowRight.addEventListener('click', () => {
-            const step = getAvgFrameWidth();
-            offset += step;
-            if (setWidth > 0) {
-                while (offset >= setWidth) offset -= setWidth;
-            }
-            track.style.transform = `translateX(${-offset}px)`;
-        });
-
-        // ── 启动 ──
-        function startGallery() {
-            setWidth = calcSetWidth();
-            if (setWidth === 0) {
-                // DOM 还未渲染完，稍后重试
-                setTimeout(startGallery, 200);
-                return;
-            }
-            rafId = requestAnimationFrame(autoScroll);
-        }
-        startGallery();
-
-        /* 窗口大小变化时重新计算 */
-        let resizeDebounce;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeDebounce);
-            resizeDebounce = setTimeout(() => {
-                setWidth = calcSetWidth();
-            }, 300);
-        });
-
-        /* 滚动淡入 —— 排除画廊内部元素 */
+        /* 滚动淡入 */
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('animate-fadeIn'); });
         }, { threshold: 0.1 });
-        document.querySelectorAll('section:not(#about) > div > div').forEach(el => observer.observe(el));
+        document.querySelectorAll('.education-item, .vibe-header, .vibe-card, section:not(#education):not(#projects) > div > div').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
