@@ -772,6 +772,70 @@
             border-color: rgba(77, 53, 40, 0.18);
             box-shadow: 0 0 0 34px rgba(77,53,40,0.035), 0 0 0 70px rgba(77,53,40,0.025);
         }
+        .research-visual {
+            position: relative;
+            min-width: 0;
+            min-height: 410px;
+            overflow: hidden;
+            background: #DDE8E4;
+        }
+        .research-card.reverse .research-visual {
+            order: 2;
+        }
+        .research-visual img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .research-visual.certificate-visual {
+            background: #D9E7EC;
+        }
+        .research-visual.certificate-visual img {
+            object-fit: contain;
+        }
+        .research-visual::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(180deg, rgba(25, 50, 48, 0.03) 48%, rgba(25, 50, 48, 0.55) 100%);
+        }
+        .research-visual-number,
+        .research-visual-caption {
+            position: absolute;
+            z-index: 2;
+            color: #FFFDF8;
+            text-shadow: 0 2px 12px rgba(25, 50, 48, 0.42);
+        }
+        .research-visual-number {
+            top: 28px;
+            left: 30px;
+            font-family: Georgia, serif;
+            font-size: 18px;
+            font-weight: 600;
+            font-style: italic;
+            letter-spacing: 0.08em;
+        }
+        .research-visual-caption {
+            right: 30px;
+            bottom: 26px;
+            left: 30px;
+            margin: 0;
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+            font-size: 12px;
+            line-height: 1.65;
+            letter-spacing: 0.05em;
+        }
+        .research-visual-collage {
+            display: grid;
+            grid-template-rows: 1.18fr 0.82fr;
+            gap: 3px;
+            background: rgba(255, 255, 255, 0.82);
+        }
+        .research-visual-collage img {
+            min-height: 0;
+        }
         .research-content {
             display: flex;
             flex-direction: column;
@@ -857,9 +921,13 @@
         }
         @media (min-width: 1060px) {
             .research-project-title.long-title {
-                font-size: clamp(1.32rem, 2vw, 1.55rem);
-                letter-spacing: -0.04em;
+                font-size: clamp(1.48rem, 2.25vw, 1.78rem);
+                letter-spacing: -0.045em;
                 white-space: nowrap;
+            }
+            .research-project-title.extra-long-title {
+                font-size: clamp(1.44rem, 2.1vw, 1.68rem);
+                letter-spacing: -0.055em;
             }
         }
         @media (max-width: 860px) {
@@ -874,8 +942,14 @@
             .research-card.reverse .research-metric {
                 order: 0;
             }
+            .research-card.reverse .research-visual {
+                order: 0;
+            }
             .research-metric {
                 min-height: 280px;
+            }
+            .research-visual {
+                min-height: 320px;
             }
         }
         @media (max-width: 560px) {
@@ -889,6 +963,18 @@
             .research-metric {
                 min-height: 238px;
                 padding: 28px;
+            }
+            .research-visual {
+                min-height: 260px;
+            }
+            .research-visual-number {
+                top: 22px;
+                left: 24px;
+            }
+            .research-visual-caption {
+                right: 24px;
+                bottom: 20px;
+                left: 24px;
             }
             .research-content {
                 padding: 30px 24px 34px;
@@ -1731,40 +1817,13 @@
                     <p class="research-eyebrow">Selected Research</p>
                     <h2 class="research-title" id="research-title">项目经历</h2>
                 </div>
-                <p class="research-intro">围绕高能物理事例选择与稀有过程测量，搭建从模拟、重建到机器学习分类和统计分析的完整研究流程。</p>
+                <p class="research-intro">从粒子物理数据分析、探测器工程实践到实验创新设计，在研究、协作与动手实践中持续拓展解决问题的边界。</p>
             </header>
 
             <div class="research-stack">
                 <article class="research-card">
-                    <div class="research-metric" aria-label="信号显著度提升百分之九十点九">
-                        <span class="research-number">Research 01</span>
-                        <div class="research-metric-main">
-                            <strong class="research-value">+90.9%</strong>
-                            <span class="research-metric-label">信号显著度提升，显著优于传统硬截断方法</span>
-                        </div>
-                    </div>
-
-                    <div class="research-content">
-                        <div class="research-meta-row">
-                            <time class="research-date" datetime="2023-06">2023.06 — 2024.05</time>
-                            <span class="research-status">已完成</span>
-                        </div>
-                        <h3 class="research-project-title long-title">多变量分析在四顶夸克事例选择优化中的应用研究</h3>
-                        <p class="research-summary">针对四顶夸克全强子衰变末态，利用机器学习方法进行事例选择优化研究。采用多变量分析工具包（TMVA）的机器学习框架，通过增强决策树（BDT）中的自适应增强与梯度增强算法，并对模型的过训练情况进行检验。</p>
-                        <p class="research-method-label">技术工具</p>
-                        <div class="research-tools" aria-label="项目方法与工具">
-                            <span>TMVA</span>
-                            <span>BDT</span>
-                            <span>AdaBoost</span>
-                            <span>Gradient Boosting</span>
-                        </div>
-                        <p class="research-outcome">通过自适应增强与梯度增强算法，将信号显著度提升 <strong>90.9%</strong>。</p>
-                    </div>
-                </article>
-
-                <article class="research-card reverse">
                     <div class="research-metric" aria-label="信噪比从十的负八次方量级提升至十的负四次方量级">
-                        <span class="research-number">Research 02</span>
+                        <span class="research-number">Research 01</span>
                         <div class="research-metric-main">
                             <strong class="research-value compact">10<sup>−8</sup> → 10<sup>−4</sup></strong>
                             <span class="research-metric-label">信噪比跨越四个数量级</span>
@@ -1787,6 +1846,81 @@
                             <span>Simultaneous Fit</span>
                         </div>
                         <p class="research-outcome">将信噪比由初始的 <strong>10<sup>−8</sup></strong> 量级提升至 <strong>10<sup>−4</sup></strong> 量级。</p>
+                    </div>
+                </article>
+
+                <article class="research-card reverse">
+                    <figure class="research-visual">
+                        <img src="images/项目经历/HGCal/hgcal-assembly.jpg" alt="CMS HGCAL 硅模块自动化组装平台与待组装模块" loading="lazy">
+                        <span class="research-visual-number">Research 02</span>
+                        <figcaption class="research-visual-caption">Gantry 自动化组装平台 · 硅传感器与 Hexaboard 模块</figcaption>
+                    </figure>
+
+                    <div class="research-content">
+                        <div class="research-meta-row">
+                            <time class="research-date" datetime="2025-09">2025.09 — 2025.12</time>
+                            <span class="research-status">工程实践</span>
+                        </div>
+                        <h3 class="research-project-title long-title">CMS HGCAL 硅模块自动化组装工程实践</h3>
+                        <p class="research-summary">操作高精度 Gantry 系统，通过视觉标定与坐标记录，完成底板、硅传感器及 Hexaboard 的自动对准与精密组装；与团队成员协同执行部件上料、视觉定位、自动拾取放置及点胶粘接流程。</p>
+                        <p class="research-method-label">实践内容</p>
+                        <div class="research-tools" aria-label="项目实践内容">
+                            <span>Gantry System</span>
+                            <span>视觉标定</span>
+                            <span>精密组装</span>
+                        </div>
+                        <p class="research-outcome">完成从部件上料到组装状态监控的协作流程，积累了<strong>探测器模块工程实践</strong>经验。</p>
+                    </div>
+                </article>
+
+                <article class="research-card">
+                    <div class="research-metric" aria-label="信号显著度提升百分之九十点九">
+                        <span class="research-number">Research 03</span>
+                        <div class="research-metric-main">
+                            <strong class="research-value">+90.9%</strong>
+                            <span class="research-metric-label">信号显著度提升，显著优于传统硬截断方法</span>
+                        </div>
+                    </div>
+
+                    <div class="research-content">
+                        <div class="research-meta-row">
+                            <time class="research-date" datetime="2023-06">2023.06 — 2024.05</time>
+                            <span class="research-status">已完成</span>
+                        </div>
+                        <h3 class="research-project-title long-title extra-long-title">多变量分析在四顶夸克事例选择优化中的应用研究</h3>
+                        <p class="research-summary">针对四顶夸克全强子衰变末态，利用机器学习方法进行事例选择优化研究。采用多变量分析工具包（TMVA）的机器学习框架，通过增强决策树（BDT）中的自适应增强与梯度增强算法，并对模型的过训练情况进行检验。</p>
+                        <p class="research-method-label">技术工具</p>
+                        <div class="research-tools" aria-label="项目方法与工具">
+                            <span>TMVA</span>
+                            <span>BDT</span>
+                            <span>AdaBoost</span>
+                            <span>Gradient Boosting</span>
+                        </div>
+                        <p class="research-outcome">通过自适应增强与梯度增强算法，将信号显著度提升 <strong>90.9%</strong>。</p>
+                    </div>
+                </article>
+
+                <article class="research-card reverse">
+                    <figure class="research-visual certificate-visual">
+                        <img src="images/项目经历/物理竞赛/award.jpg" alt="湖北省第七届大学生物理实验创新设计竞赛一等奖证书" loading="lazy">
+                        <span class="research-visual-number">Research 04</span>
+                        <figcaption class="research-visual-caption">湖北省第七届大学生物理实验创新设计竞赛 · 一等奖</figcaption>
+                    </figure>
+
+                    <div class="research-content">
+                        <div class="research-meta-row">
+                            <time class="research-date" datetime="2022-05">2022.05 — 2022.07</time>
+                            <span class="research-status">省级一等奖</span>
+                        </div>
+                        <h3 class="research-project-title long-title">湖北省第七届大学生物理实验创新设计竞赛</h3>
+                        <p class="research-summary">担任团队队长，搭建基于光栅衍射的简易光谱仪，利用汞原子光谱完成仪器标定，并测量氢原子光谱及其波长；根据实验结果计算氢原子量子化能级，负责实验报告撰写。</p>
+                        <p class="research-method-label">实验内容</p>
+                        <div class="research-tools" aria-label="项目实验内容">
+                            <span>搭建光谱仪</span>
+                            <span>仪器标定</span>
+                            <span>光谱测量</span>
+                        </div>
+                        <p class="research-outcome">完成装置搭建、测量分析与报告交付，项目最终荣获<strong>湖北省一等奖</strong>。</p>
                     </div>
                 </article>
             </div>
